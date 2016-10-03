@@ -23,6 +23,7 @@ public class FacadePersonTest {
     FacadePerson instance = new FacadePerson(emf);
     
     public FacadePersonTest() {
+        
     }
     
     @BeforeClass
