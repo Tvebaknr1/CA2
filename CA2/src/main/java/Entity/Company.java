@@ -22,31 +22,72 @@ public class Company implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String email;
+    private String name;
+    private String description;
+    private int cvr;
+    private int numEmployees;
+    private float marketValue;
 
     public Company()
     {}
 
-    public Company(String email)
-    {
-        this.email = email;
+    public Company(String name, String description, int cvr, int numEmployees, float marketValue) {
+        this.name = name;
+        this.description = description;
+        this.cvr = cvr;
+        this.numEmployees = numEmployees;
+        this.marketValue = marketValue;
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public String getEmail()
-    {
-        return email;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setEmail(String email)
-    {
-        this.email = email;
+    public String getName() {
+        return name;
     }
-    
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getCvr() {
+        return cvr;
+    }
+
+    public void setCvr(int cvr) {
+        this.cvr = cvr;
+    }
+
+    public int getNumEmployees() {
+        return numEmployees;
+    }
+
+    public void setNumEmployees(int numEmployees) {
+        this.numEmployees = numEmployees;
+    }
+
+    public float getMarketValue() {
+        return marketValue;
+    }
+
+    public void setMarketValue(float marketValue) {
+        this.marketValue = marketValue;
+    }
+
+   
     
 
     
