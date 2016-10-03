@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author LouiseB
  */
 @Entity
-public class Company implements Serializable
+public class InfoEntity implements Serializable
 {
 
     @Id
@@ -24,10 +24,11 @@ public class Company implements Serializable
     private int id;
     private String email;
 
-    public Company()
-    {}
+    public InfoEntity()
+    {
+    }
 
-    public Company(String email)
+    public InfoEntity(String email)
     {
         this.email = email;
     }

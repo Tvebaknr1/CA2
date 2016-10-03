@@ -16,38 +16,13 @@ import javax.persistence.Id;
  * @author LouiseB
  */
 @Entity
-public class Company implements Serializable
+public class CityInfo implements Serializable
 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String email;
+    private int zipCode;
+    private String city;
 
-    public Company()
-    {}
-
-    public Company(String email)
-    {
-        this.email = email;
-    }
-
-    public int getId()
-    {
-        return id;
-    }
-
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-    
-    
-
-    
 }

@@ -16,21 +16,23 @@ import javax.persistence.Id;
  * @author LouiseB
  */
 @Entity
-public class Person implements Serializable
+public class Adress implements Serializable
 {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String firstName;
-    String lastName;
-    
-    public Person()
-    {}
+    private int id;
+    private String street;
+    private String additionalInfo;
 
-    public Person(String firstName, String lastName)
+    public Adress()
     {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    }
+
+    public Adress(String street, String additionalInfo)
+    {
+        this.street = street;
+        this.additionalInfo = additionalInfo;
     }
 
     public int getId()
@@ -38,25 +40,26 @@ public class Person implements Serializable
         return id;
     }
 
-    public String getFirstName()
+    public String getStreet()
     {
-        return firstName;
+        return street;
     }
 
-    public void setFirstName(String firstName)
+    public void setStreet(String street)
     {
-        this.firstName = firstName;
+        this.street = street;
     }
 
-    public String getLastName()
+    public String getAdditionalInfo()
     {
-        return lastName;
+        return additionalInfo;
     }
 
-    public void setLastName(String lastName)
+    public void setAdditionalInfo(String additionalInfo)
     {
-        this.lastName = lastName;
+        this.additionalInfo = additionalInfo;
     }
+    
     
     
 }
