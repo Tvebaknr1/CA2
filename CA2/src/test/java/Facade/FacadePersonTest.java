@@ -23,6 +23,7 @@ public class FacadePersonTest {
     FacadePerson instance = new FacadePerson(Persistence.createEntityManagerFactory("ca2putest"));
     
     public FacadePersonTest() {
+        
     }
     
     @BeforeClass

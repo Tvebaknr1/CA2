@@ -14,9 +14,9 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author LouiseB
  */
-public class FacadeCompany
-{
-        EntityManagerFactory emf;
+public class FacadeCompany {
+
+    EntityManagerFactory emf;
 
     public FacadeCompany(EntityManagerFactory emf) {
         this.emf = emf;
@@ -25,7 +25,9 @@ public class FacadeCompany
     public void setFactory(EntityManagerFactory emf) {
         this.emf = emf;
     }
+
         public Company getCompany(String cvr) {
+
 
         EntityManager em = emf.createEntityManager();
 
