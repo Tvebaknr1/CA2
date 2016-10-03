@@ -22,12 +22,12 @@ import org.junit.Test;
 public class FacadeCompanyTest
 {
 
-    FacadeCompany instance;
+    FacadeCompany facadeCompany;
 
     public FacadeCompanyTest()
     {
-        instance = new FacadeCompany(Persistence.createEntityManagerFactory("ca2putest"));
-
+        facadeCompany = new FacadeCompany(Persistence.createEntityManagerFactory("ca2putest"));
+        
         
     }
 
@@ -61,7 +61,7 @@ public class FacadeCompanyTest
         System.out.println("getCompany");
         String cvr = "";
         Company expResult = null;
-        Company result = instance.getCompany(cvr);
+        Company result = facadeCompany.getCompany(cvr);
         assertEquals(expResult, result);
     }
 
@@ -73,7 +73,7 @@ public class FacadeCompanyTest
     {
         System.out.println("getCompanys");
         List<Company> expResult = null;
-        List<Company> result = instance.getCompanys();
+        List<Company> result = facadeCompany.getCompanys();
         assertEquals(expResult, result);
     }
 
