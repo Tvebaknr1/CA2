@@ -29,8 +29,8 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(Entity.RESTCompany.class);
-        resources.add(Entity.RESTPerson.class);
+        resources.add(REST.RESTCompany.class);
+        resources.add(REST.RESTPerson.class);
     }
     
 }

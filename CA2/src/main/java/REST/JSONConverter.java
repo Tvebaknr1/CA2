@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rest1.ca2;
+package REST;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import java.util.List;
+import Interface.PersonInterface;
 
 /**
  *
@@ -15,21 +16,21 @@ import java.util.List;
  */
 public class JSONConverter {
 
-    public static Person getPersonFromJson(String js) {
+    public static PersonInterface getPersonFromJson(String js) {
         Gson gson = new Gson();
-        Person result = gson.fromJson(js, Person.class);
+        PersonInterface result = gson.fromJson(js, PersonInterface.class);
         return result;
     }
 
-    public static String getJSONFromPerson(Person p) {
+    public static String getJSONFromPerson(PersonInterface p) {
         Gson gson = new Gson();
         String jsonInString = gson.toJson(p);
         return jsonInString;
     }
 
-    public static String getJSONFromPerson(List<Person> Persons) {
+    public static String getJSONFromPerson(List<PersonInterface> Persons) {
         JsonArray jarray = new JsonArray();
-        for (Person p : Persons) {
+        for (PersonInterface p : Persons) {
             jarray.add(getJSONFromPerson(p));
         }
 

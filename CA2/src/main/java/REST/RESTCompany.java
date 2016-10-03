@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package REST;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -19,20 +19,20 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Emil
  */
-@Path("person")
-public class RESTPerson {
+@Path("company")
+public class RESTCompany {
 
     @Context
     private UriInfo context;
 
     /**
-     * Creates a new instance of RestPerson
+     * Creates a new instance of RESTCompany
      */
-    public RESTPerson() {
+    public RESTCompany() {
     }
 
     /**
-     * Retrieves representation of an instance of rest1.ca2.RESTPerson
+     * Retrieves representation of an instance of rest1.ca2.RESTCompany
      * @return an instance of java.lang.String
      */
     @GET
@@ -43,7 +43,7 @@ public class RESTPerson {
     }
 
     /**
-     * PUT method for updating or creating an instance of RESTPerson
+     * PUT method for updating or creating an instance of RESTCompany
      * @param content representation for the resource
      */
     @PUT

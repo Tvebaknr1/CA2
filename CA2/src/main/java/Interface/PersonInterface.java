@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rest1.ca2;
+package Interface;
 
 /**
  *
  * @author Emil
  */
-public interface Person {
+public interface PersonInterface {
     
 }

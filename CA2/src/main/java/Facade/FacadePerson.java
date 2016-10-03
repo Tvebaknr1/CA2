@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rest1.ca2;
+package Facade;
 
+import Interface.PersonInterface;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,11 +14,11 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author Emil
  */
-public class facade {
+public class FacadePerson {
 
     EntityManagerFactory emf;
 
-    public facade(EntityManagerFactory emf) {
+    public FacadePerson(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
@@ -25,14 +26,14 @@ public class facade {
         this.emf = emf;
     }
 
-    public Person getPerson(int id) {
+    public PersonInterface getPerson(int id) {
         EntityManager em = emf.createEntityManager();
 
-        Person p = null;
+        PersonInterface p = null;
 
         try {
             em.getTransaction().begin();
-            p = em.find(Person.class, id);
+            p = em.find(PersonInterface.class, id);
             em.getTransaction().commit();
             return p;
         } finally {
@@ -40,11 +41,11 @@ public class facade {
         }
     }
 
-    public List<Person> getPersons() {
+    public List<PersonInterface> getPersons() {
 
         EntityManager em = emf.createEntityManager();
 
-        List<Person> persons = null;
+        List<PersonInterface> persons = null;
 
         try {
             em.getTransaction().begin();
@@ -56,11 +57,11 @@ public class facade {
         }
     }
 
-    public List<Person> getPersons(int zipCode) {
+    public List<PersonInterface> getPersons(int zipCode) {
 
         EntityManager em = emf.createEntityManager();
 
-        List<Person> persons = null;
+        List<PersonInterface> persons = null;
 
         try {
             em.getTransaction().begin();
@@ -72,36 +73,6 @@ public class facade {
         }
     }
 
-    public Company getCompany(String cvr) {
 
-        EntityManager em = emf.createEntityManager();
-
-        Company c = null;
-
-        try {
-            em.getTransaction().begin();
-            c = em.find(Company.class, cvr);
-            em.getTransaction().commit();
-            return c;
-        } finally {
-            em.close();
-        }
-    }
-
-    public List<Company> getCompanys() {
-
-        EntityManager em = emf.createEntityManager();
-
-        List<Company> companies = null;
-
-        try {
-            em.getTransaction().begin();
-            companies = em.createQuery("Select * from Company c").getResultList();
-            em.getTransaction().commit();
-            return companies;
-        } finally {
-            em.close();
-        }
-    }
 
 }
