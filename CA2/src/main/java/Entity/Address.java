@@ -6,17 +6,21 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author LouiseB
  */
 @Entity
-public class Adress implements Serializable
+public class Address implements Serializable
 {
 
     @Id
@@ -25,11 +29,17 @@ public class Adress implements Serializable
     private String street;
     private String additionalInfo;
 
-    public Adress()
+    @OneToMany(mappedBy = "address")
+    List<InfoEntity> infoEntitys = new ArrayList();
+    
+    @ManyToOne
+    private CityInfo cityInfo;
+
+    public Address()
     {
     }
 
-    public Adress(String street, String additionalInfo)
+    public Address(String street, String additionalInfo)
     {
         this.street = street;
         this.additionalInfo = additionalInfo;
@@ -59,7 +69,5 @@ public class Adress implements Serializable
     {
         this.additionalInfo = additionalInfo;
     }
-    
-    
-    
+
 }
