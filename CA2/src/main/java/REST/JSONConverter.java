@@ -5,10 +5,10 @@
  */
 package REST;
 
+import Entity.Person;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import java.util.List;
-import Interface.PersonInterface;
 
 /**
  *
@@ -16,21 +16,21 @@ import Interface.PersonInterface;
  */
 public class JSONConverter {
 
-    public static PersonInterface getPersonFromJson(String js) {
+    public static Person getPersonFromJson(String js) {
         Gson gson = new Gson();
-        PersonInterface result = gson.fromJson(js, PersonInterface.class);
+        Person result = gson.fromJson(js, Person.class);
         return result;
     }
 
-    public static String getJSONFromPerson(PersonInterface p) {
+    public static String getJSONFromPerson(Person p) {
         Gson gson = new Gson();
         String jsonInString = gson.toJson(p);
         return jsonInString;
     }
 
-    public static String getJSONFromPerson(List<PersonInterface> Persons) {
+    public static String getJSONFromPerson(List<Person> Persons) {
         JsonArray jarray = new JsonArray();
-        for (PersonInterface p : Persons) {
+        for (Person p : Persons) {
             jarray.add(getJSONFromPerson(p));
         }
 

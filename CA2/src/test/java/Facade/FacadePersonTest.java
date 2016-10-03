@@ -5,7 +5,7 @@
  */
 package Facade;
 
-import Interface.PersonInterface;
+import Entity.Person;
 import java.util.List;
 import javax.persistence.Persistence;
 import org.junit.After;
@@ -48,8 +48,8 @@ public class FacadePersonTest {
     public void testGetPerson() {
         System.out.println("getPerson");
         int id = 1;
-        PersonInterface expResult = null;
-        PersonInterface result = instance.getPerson(id);
+        Person expResult = null;
+        Person result = instance.getPerson(id);
         assertEquals(expResult, result);
     }
 
@@ -59,8 +59,8 @@ public class FacadePersonTest {
     @Test
     public void testGetPersons_0args() {
         System.out.println("getPersons");
-        List<PersonInterface> expResult = null;
-        List<PersonInterface> result = instance.getPersons();
+        List<Person> expResult = null;
+        List<Person> result = instance.getPersons();
         assertEquals(expResult, result);
     }
 
@@ -71,8 +71,8 @@ public class FacadePersonTest {
     public void testGetPersons_int() {
         System.out.println("getPersons");
         int zipCode = 3600;
-        List<PersonInterface> expResult = null;
-        List<PersonInterface> result = instance.getPersons(zipCode);
+        List<Person> expResult = null;
+        List<Person> result = instance.getPersons(zipCode);
         assertEquals(expResult, result);
     }
     

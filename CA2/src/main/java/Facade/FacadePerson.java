@@ -5,7 +5,7 @@
  */
 package Facade;
 
-import Interface.PersonInterface;
+import Entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,65 +14,75 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author Emil
  */
-public class FacadePerson {
+public class FacadePerson
+{
 
     EntityManagerFactory emf;
 
-    public FacadePerson(EntityManagerFactory emf) {
+    public FacadePerson(EntityManagerFactory emf)
+    {
         this.emf = emf;
     }
 
-    public void setFactory(EntityManagerFactory emf) {
+    public void setFactory(EntityManagerFactory emf)
+    {
         this.emf = emf;
     }
 
-    public PersonInterface getPerson(int id) {
+    public Person getPerson(int id)
+    {
         EntityManager em = emf.createEntityManager();
 
-        PersonInterface p = null;
+        Person p = null;
 
-        try {
+        try
+        {
             em.getTransaction().begin();
-            p = em.find(PersonInterface.class, id);
+            p = em.find(Person.class, id);
             em.getTransaction().commit();
             return p;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
-    public List<PersonInterface> getPersons() {
+    public List<Person> getPersons()
+    {
 
         EntityManager em = emf.createEntityManager();
 
-        List<PersonInterface> persons = null;
+        List<Person> persons = null;
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             persons = em.createQuery("Select * from Person p").getResultList();
             em.getTransaction().commit();
             return persons;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
-    public List<PersonInterface> getPersons(int zipCode) {
+    public List<Person> getPersons(int zipCode)
+    {
 
         EntityManager em = emf.createEntityManager();
 
-        List<PersonInterface> persons = null;
+        List<Person> persons = null;
 
-        try {
+        try
+        {
             em.getTransaction().begin();
-            persons = em.createQuery("Select * from Person p where zipcode ="+zipCode).getResultList();
+            persons = em.createQuery("Select * from Person p where zipcode =" + zipCode).getResultList();
             em.getTransaction().commit();
             return persons;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
-
-
 
 }

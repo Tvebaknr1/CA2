@@ -5,7 +5,7 @@
  */
 package Facade;
 
-import Interface.CompanyInterface;
+import Entity.Company;
 import java.util.List;
 import javax.persistence.Persistence;
 import org.junit.After;
@@ -60,8 +60,8 @@ public class FacadeCompanyTest
     {
         System.out.println("getCompany");
         String cvr = "";
-        CompanyInterface expResult = null;
-        CompanyInterface result = instance.getCompany(cvr);
+        Company expResult = null;
+        Company result = instance.getCompany(cvr);
         assertEquals(expResult, result);
     }
 
@@ -72,8 +72,8 @@ public class FacadeCompanyTest
     public void testGetCompanys()
     {
         System.out.println("getCompanys");
-        List<CompanyInterface> expResult = null;
-        List<CompanyInterface> result = instance.getCompanys();
+        List<Company> expResult = null;
+        List<Company> result = instance.getCompanys();
         assertEquals(expResult, result);
     }
 

@@ -5,7 +5,7 @@
  */
 package Facade;
 
-import Interface.CompanyInterface;
+import Entity.Company;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,15 +25,15 @@ public class FacadeCompany
     public void setFactory(EntityManagerFactory emf) {
         this.emf = emf;
     }
-        public CompanyInterface getCompany(String cvr) {
+        public Company getCompany(String cvr) {
 
         EntityManager em = emf.createEntityManager();
 
-        CompanyInterface c = null;
+        Company c = null;
 
         try {
             em.getTransaction().begin();
-            c = em.find(CompanyInterface.class, cvr);
+            c = em.find(Company.class, cvr);
             em.getTransaction().commit();
             return c;
         } finally {
@@ -41,11 +41,11 @@ public class FacadeCompany
         }
     }
 
-    public List<CompanyInterface> getCompanys() {
+    public List<Company> getCompanys() {
 
         EntityManager em = emf.createEntityManager();
 
-        List<CompanyInterface> companies = null;
+        List<Company> companies = null;
 
         try {
             em.getTransaction().begin();
