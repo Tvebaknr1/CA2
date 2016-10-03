@@ -7,14 +7,13 @@ package Facade;
 
 import Interface.CompanyInterface;
 import java.util.List;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -27,7 +26,7 @@ public class FacadeCompanyTest
 
     public FacadeCompanyTest()
     {
-        instance = new FacadeCompany(Persistence.createEntityManagerFactory("com.mycompany_restAndRestApi_war_1.0-SNAPSHOTPU"));
+        instance = new FacadeCompany(Persistence.createEntityManagerFactory("ca2putest"));
 
         
     }

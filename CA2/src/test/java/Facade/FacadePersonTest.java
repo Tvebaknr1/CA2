@@ -7,20 +7,20 @@ package Facade;
 
 import Interface.PersonInterface;
 import java.util.List;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author Emil
  */
 public class FacadePersonTest {
-    FacadePerson instance = new FacadePerson(emf);
+    FacadePerson instance = new FacadePerson(Persistence.createEntityManagerFactory("ca2putest"));
     
     public FacadePersonTest() {
         
