@@ -61,7 +61,10 @@ public class InfoEntity implements Serializable
         this.email = email;
     }
     
-    
+    public List getPhones()
+    {
+        return phones;
+    }
 
     
 }
