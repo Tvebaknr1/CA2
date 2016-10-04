@@ -30,15 +30,15 @@ public class FacadePerson {
         this.emf = emf;
     }
 
-    public Person getPerson(int id) {
-        
+    public Person getPerson(int phone) {
+
         EntityManager em = emf.createEntityManager();
 
         Person p = null;
 
         try {
             em.getTransaction().begin();
-            p = em.find(Person.class, id);
+            p = em.find(Person.class, phone);
             em.getTransaction().commit();
             return p;
         } finally {
@@ -62,21 +62,21 @@ public class FacadePerson {
         }
     }
 
-    public List<Person> getPersons(int zipCode) {
-
-        EntityManager em = emf.createEntityManager();
-
-        List<Person> persons = null;
-        try {
-            em.getTransaction().begin();
-            persons = em.createQuery("SELECT p1,c1 FROM Person p1 join Address c1 WHERE c1.id LIKE p1.address").setParameter("zipcode", zipCode).getResultList();
-                    //+ "SELECT p, z FROM Person p WHERE p.zip LIKE :zipcode INNER JOIN p1.neighbors c2").setParameter("zipcode", zipCode).getResultList();
-            em.getTransaction().commit();
-            return persons;
-        } finally {
-            em.close();
-        }
-    }
+//    public List<Person> getPersonsbyzipcode(int zipCode) {
+//
+//        EntityManager em = emf.createEntityManager();
+//
+//        List<Person> persons = null;
+//        try {
+//            em.getTransaction().begin();
+//            persons = em.createQuery("SELECT p1 FROM InfoEntity p1 join Address c1 WHERE p1.address =c1.id").getResultList();
+//                    //+ "SELECT p, z FROM Person p WHERE p.zip LIKE :zipcode INNER JOIN p1.neighbors c2").setParameter("zipcode", zipCode).getResultList();
+//            em.getTransaction().commit();
+//            return persons;
+//        } finally {
+//            em.close();
+//        }
+//    }
 
     public static void main(String[] args) {
         FacadePerson fp = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));

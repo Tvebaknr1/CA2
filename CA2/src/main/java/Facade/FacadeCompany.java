@@ -26,7 +26,7 @@ public class FacadeCompany {
         this.emf = emf;
     }
 
-        public Company getCompany(String cvr) {
+        public Company getCompany(int cvr) {
 
 
         EntityManager em = emf.createEntityManager();

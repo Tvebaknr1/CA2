@@ -9,9 +9,14 @@ import Entity.Person;
 import Facade.FacadePerson;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -28,9 +33,17 @@ import javax.ws.rs.core.MediaType;
 @Path("person")
 public class RESTPerson {
 
+<<<<<<< HEAD
     public RESTPerson(UriInfo context) {
         this.context = context;
     }
+=======
+    private static Map<Integer, Person> persons = new HashMap() {
+        {
+        }
+    };
+    FacadePerson facadePerson;
+>>>>>>> 5795a6aec5372c162435fbc6a2e94c6c6b3ea4fa
 
     @Context
     private UriInfo context;
@@ -39,6 +52,7 @@ public class RESTPerson {
      * Creates a new instance of RestPerson
      */
     public RESTPerson() {
+        facadePerson = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));
     }
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("ca2pu");
     FacadePerson fp = new FacadePerson(emf);
@@ -52,16 +66,22 @@ public class RESTPerson {
 //        String jsonreponse = new Gson().toJson(person);
 //        return jsonreponse;
 //    }
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("complete")
     public String getPerson() {
+<<<<<<< HEAD
         List<JsonObject> Persons = new ArrayList<>();
         List<Person> list =fp.getPersons();
         for (Person person: list )
         {
             JsonObject jsonObject = new JsonObject();
+=======
+
+        JsonObject Person = new JsonObject();
+        for (int i = 0; i < persons.size(); i++) {
+            Person.addProperty("Person", JSONConverter.getJSONFromPerson(persons.get(i)));
+>>>>>>> 5795a6aec5372c162435fbc6a2e94c6c6b3ea4fa
         }
 //
 //        List<Person> Persons;
@@ -83,17 +103,16 @@ public class RESTPerson {
     }
 //
 //    @GET
+//    @Path("{id}")
 //    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("complete/id")
-//    public String getPersonid() {
-//        JsonObject person = new JsonObject();
-//        for (int i = 0; i < persons.size(); i++) {
-//            person.addProperty("Person", JSONConverter.getJSONFromint(persons.get(i).getId()));
-//        }
-//        String jsonreponse = new Gson().toJson(person);
-//        return jsonreponse;
+//    public String getPerson(@PathParam("id") int id) 
+//    {
+//        System.out.println("getPerson");
+//        Person p = facadePerson.getPerson(id);
+//        return new Gson().toJson(facadePerson.getPerson(id));
 //    }
 //
+
 //    @GET
 //    @Produces(MediaType.APPLICATION_JSON)
 //    @Path("{contactinfo/id}")
@@ -168,4 +187,4 @@ public class RESTPerson {
 //    @Consumes(MediaType.APPLICATION_XML)
 //    public void putXml(String content) {
 //    }
-}
+    }
