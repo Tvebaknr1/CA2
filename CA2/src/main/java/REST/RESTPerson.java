@@ -70,11 +70,16 @@ public class RESTPerson {
     public String getPerson() {
 
         List<JsonObject> Persons = new ArrayList<>();
-        List<Person> list =fp.getPersons();
+        List<Person> list = fp.getPersons();
         for (Person person: list )
         {
             JsonObject jsonObject = new JsonObject();
-
+            jsonObject.addProperty("firstName", person.getFirstName());
+            jsonObject.addProperty("lastName", person.getLastName());
+            jsonObject.addProperty("email", person.getEmail());
+            jsonObject.addProperty("address", new Gson().toJson(person.getAddresses()));
+            jsonObject.addProperty("phone", new Gson().toJson(person.getPhones()));
+            Persons.add(jsonObject);
         }
 //
 //        List<Person> Persons;
@@ -92,7 +97,7 @@ public class RESTPerson {
 //        str +=  "]}";
 //        String jsonreponse = new Gson().toJson(Person);
 
-        return new Gson().toJson(list);
+        return new Gson().toJson(Persons);
     }
 //
 //    @GET
