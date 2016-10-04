@@ -26,7 +26,7 @@ public class FacadeCompanyTest
 
     public FacadeCompanyTest()
     {
-        facadeCompany = new FacadeCompany(Persistence.createEntityManagerFactory("ca2putest"));
+        facadeCompany = new FacadeCompany(Persistence.createEntityManagerFactory("ca2pu"));
         
         
     }
