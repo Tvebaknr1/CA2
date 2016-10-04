@@ -49,5 +49,9 @@ public class Person extends InfoEntity {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+    @Override
+    public String toString(){
+        return firstName + lastName + super.getEmail();
+    }
 
 }

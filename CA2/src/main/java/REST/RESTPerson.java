@@ -6,10 +6,12 @@
 package REST;
 
 import Entity.Person;
+import Facade.FacadePerson;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.util.HashMap;
 import java.util.Map;
+import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -36,6 +38,7 @@ public class RESTPerson {
         {
         }
     };
+    FacadePerson facadePerson;
 
     @Context
     private UriInfo context;
@@ -44,6 +47,7 @@ public class RESTPerson {
      * Creates a new instance of RestPerson
      */
     public RESTPerson() {
+        facadePerson = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));
     }
 
 //    @GET
@@ -56,12 +60,11 @@ public class RESTPerson {
 //        String jsonreponse = new Gson().toJson(person);
 //        return jsonreponse;
 //    }
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("complete")
     public String getPerson() {
-        
+
         JsonObject Person = new JsonObject();
         for (int i = 0; i < persons.size(); i++) {
             Person.addProperty("Person", JSONConverter.getJSONFromPerson(persons.get(i)));
@@ -71,17 +74,16 @@ public class RESTPerson {
     }
 //
 //    @GET
+//    @Path("{id}")
 //    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("complete/id")
-//    public String getPersonid() {
-//        JsonObject person = new JsonObject();
-//        for (int i = 0; i < persons.size(); i++) {
-//            person.addProperty("Person", JSONConverter.getJSONFromint(persons.get(i).getId()));
-//        }
-//        String jsonreponse = new Gson().toJson(person);
-//        return jsonreponse;
+//    public String getPerson(@PathParam("id") int id) 
+//    {
+//        System.out.println("getPerson");
+//        Person p = facadePerson.getPerson(id);
+//        return new Gson().toJson(facadePerson.getPerson(id));
 //    }
 //
+
 //    @GET
 //    @Produces(MediaType.APPLICATION_JSON)
 //    @Path("{contactinfo/id}")
@@ -156,4 +158,4 @@ public class RESTPerson {
 //    @Consumes(MediaType.APPLICATION_XML)
 //    public void putXml(String content) {
 //    }
-}
+    }
