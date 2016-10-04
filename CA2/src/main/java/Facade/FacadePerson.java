@@ -45,6 +45,21 @@ public class FacadePerson {
             em.close();
         }
     }
+    public Person getPersonbyid(int id) {
+
+        EntityManager em = emf.createEntityManager();
+
+        Person p = null;
+
+        try {
+            em.getTransaction().begin();
+            p = em.find(Person.class, id);
+            em.getTransaction().commit();
+            return p;
+        } finally {
+            em.close();
+        }
+    }
 
     public List<Person> getPersons() {
         EntityManager em = emf.createEntityManager();
@@ -81,6 +96,35 @@ public class FacadePerson {
     public static void main(String[] args) {
         FacadePerson fp = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));
         System.out.println(fp.getPersons());
+    }
+    public Person removePersonbyid(int id) {
+
+        EntityManager em = emf.createEntityManager();
+
+        Person p = null;
+
+        try {
+            p = em.find(Person.class, id);
+            em.getTransaction().begin();
+            em.refresh(p);
+            em.getTransaction().commit();
+            return p;
+        } finally {
+            em.close();
+        }
+    }
+
+    public void put(Person jo) {
+        EntityManager em = emf.createEntityManager();
+
+
+        try {
+            em.getTransaction().begin();
+            em.persist(jo);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
 
 }
