@@ -50,7 +50,7 @@ public class FacadePerson {
 
         try {
             em.getTransaction().begin();
-            persons = em.createQuery("Select i from Person i").getResultList();
+            persons = em.createQuery("Select i from InfoEntity i").getResultList();
 
             em.getTransaction().commit();
             return persons;
