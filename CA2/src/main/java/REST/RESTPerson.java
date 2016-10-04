@@ -33,17 +33,11 @@ import javax.ws.rs.core.MediaType;
 @Path("person")
 public class RESTPerson {
 
-<<<<<<< HEAD
+
     public RESTPerson(UriInfo context) {
         this.context = context;
     }
-=======
-    private static Map<Integer, Person> persons = new HashMap() {
-        {
-        }
-    };
-    FacadePerson facadePerson;
->>>>>>> 5795a6aec5372c162435fbc6a2e94c6c6b3ea4fa
+
 
     @Context
     private UriInfo context;
@@ -52,7 +46,7 @@ public class RESTPerson {
      * Creates a new instance of RestPerson
      */
     public RESTPerson() {
-        facadePerson = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));
+        //facadePerson = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));
     }
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("ca2pu");
     FacadePerson fp = new FacadePerson(emf);
@@ -70,18 +64,13 @@ public class RESTPerson {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("complete")
     public String getPerson() {
-<<<<<<< HEAD
+
         List<JsonObject> Persons = new ArrayList<>();
         List<Person> list =fp.getPersons();
         for (Person person: list )
         {
             JsonObject jsonObject = new JsonObject();
-=======
 
-        JsonObject Person = new JsonObject();
-        for (int i = 0; i < persons.size(); i++) {
-            Person.addProperty("Person", JSONConverter.getJSONFromPerson(persons.get(i)));
->>>>>>> 5795a6aec5372c162435fbc6a2e94c6c6b3ea4fa
         }
 //
 //        List<Person> Persons;
