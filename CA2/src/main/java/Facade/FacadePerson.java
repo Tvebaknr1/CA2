@@ -5,84 +5,79 @@
  */
 package Facade;
 
+import Entity.CityInfo;
 import Entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
  * @author Emil
  */
-public class FacadePerson
-{
+public class FacadePerson {
 
     EntityManagerFactory emf;
 
-    public FacadePerson(EntityManagerFactory emf)
-    {
+    public FacadePerson(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
-    public void setFactory(EntityManagerFactory emf)
-    {
+    public void setFactory(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
-    public Person getPerson(int id)
-    {
+    public Person getPerson(int id) {
         EntityManager em = emf.createEntityManager();
 
         Person p = null;
 
-        try
-        {
+        try {
             em.getTransaction().begin();
             p = em.find(Person.class, id);
             em.getTransaction().commit();
             return p;
-        } finally
-        {
+        } finally {
             em.close();
         }
     }
 
-    public List<Person> getPersons()
-    {
+    public List<Person> getPersons() {
+        EntityManager em = emf.createEntityManager();
+
+        List<Person> persons = null;
+
+        try {
+            em.getTransaction().begin();
+            persons = em.createQuery("Select i from Person i").getResultList();
+            em.getTransaction().commit();
+            return persons;
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Person> getPersons(int zipCode) {
 
         EntityManager em = emf.createEntityManager();
 
         List<Person> persons = null;
 
-        try
-        {
+        try {
             em.getTransaction().begin();
-            persons = em.createQuery("Select * from Person p").getResultList();
+            persons = em.createQuery("SELECT c1, p1 FROM Person p1, CityInfo c1 ").getResultList();
+                    //+ "SELECT p, z FROM Person p WHERE p.zip LIKE :zipcode INNER JOIN p1.neighbors c2").setParameter("zipcode", zipCode).getResultList();
             em.getTransaction().commit();
             return persons;
-        } finally
-        {
+        } finally {
             em.close();
         }
     }
 
-    public List<Person> getPersons(int zipCode)
-    {
-
-        EntityManager em = emf.createEntityManager();
-
-        List<Person> persons = null;
-
-        try
-        {
-            em.getTransaction().begin();
-            persons = em.createQuery("Select * from Person p where zipcode =" + zipCode).getResultList();
-            em.getTransaction().commit();
-            return persons;
-        } finally
-        {
-            em.close();
-        }
+    public static void main(String[] args) {
+        FacadePerson fp = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));
+        System.out.println(fp.getPersons(3600));
     }
 
 }
