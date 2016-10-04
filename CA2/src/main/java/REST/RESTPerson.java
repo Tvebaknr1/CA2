@@ -6,22 +6,18 @@
 package REST;
 
 import Entity.Person;
+import Facade.FacadePerson;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -32,10 +28,9 @@ import javax.ws.rs.core.MediaType;
 @Path("person")
 public class RESTPerson {
 
-    private static Map<Integer, Person> persons = new HashMap() {
-        {
-        }
-    };
+    public RESTPerson(UriInfo context) {
+        this.context = context;
+    }
 
     @Context
     private UriInfo context;
@@ -45,7 +40,8 @@ public class RESTPerson {
      */
     public RESTPerson() {
     }
-
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("ca2pu");
+    FacadePerson fp = new FacadePerson(emf);
 //    @GET
 //    @Produces(MediaType.APPLICATION_JSON)
 //    @Path("contactinfo/{contactinfo}")
@@ -61,13 +57,29 @@ public class RESTPerson {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("complete")
     public String getPerson() {
-        
-        JsonObject Person = new JsonObject();
-        for (int i = 0; i < persons.size(); i++) {
-            Person.addProperty("Person", JSONConverter.getJSONFromPerson(persons.get(i)));
+        List<JsonObject> Persons = new ArrayList<>();
+        List<Person> list =fp.getPersons();
+        for (Person person: list )
+        {
+            JsonObject jsonObject = new JsonObject();
         }
-        String jsonreponse = new Gson().toJson(Person);
-        return jsonreponse;
+//
+//        List<Person> Persons;
+//        Persons = fp.getPersons();
+//        System.out.println(" fuck you>" + Persons.size());
+//        JsonObject Person = new JsonObject();
+//        String str
+//                    = "{\"Person\": [";
+//        for (int i = 0; i < Persons.size(); i++) {
+//            
+//                   //str += JSONConverter.getJSONFromPerson(Persons.get(i));
+//                   
+//            
+//        }
+//        str +=  "]}";
+//        String jsonreponse = new Gson().toJson(Person);
+
+        return new Gson().toJson(list);
     }
 //
 //    @GET
