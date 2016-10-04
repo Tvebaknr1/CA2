@@ -23,7 +23,7 @@ public class SchemaBuilder
         HashMap<String, Object> puProperties = new HashMap<>();
         puProperties.put("javax.persistence.sql-load-script-source", "Data/CityInfoData.sql");
         Persistence.generateSchema("ca2pu", puProperties);
-
+        
     }
 
 }

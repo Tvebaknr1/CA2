@@ -51,7 +51,7 @@ public class FacadeCompany {
 
         try {
             em.getTransaction().begin();
-            companies = em.createQuery("Select * from Company c").getResultList();
+            companies = em.createQuery("Select c from Company c").getResultList();
             em.getTransaction().commit();
             return companies;
         } finally {
