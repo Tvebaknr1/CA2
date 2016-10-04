@@ -7,6 +7,7 @@ package Facade;
 
 import Entity.CityInfo;
 import Entity.Person;
+import java.io.Console;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,6 +22,7 @@ public class FacadePerson {
     EntityManagerFactory emf;
 
     public FacadePerson(EntityManagerFactory emf) {
+        System.out.println("test 2");
         this.emf = emf;
     }
 
@@ -29,6 +31,7 @@ public class FacadePerson {
     }
 
     public Person getPerson(int phone) {
+
         EntityManager em = emf.createEntityManager();
 
         Person p = null;
@@ -50,7 +53,7 @@ public class FacadePerson {
 
         try {
             em.getTransaction().begin();
-            persons = em.createQuery("Select i from InfoEntity i").getResultList();
+            persons = em.createQuery("Select i from Person i").getResultList();
 
             em.getTransaction().commit();
             return persons;
