@@ -5,23 +5,16 @@
  */
 package Entity;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  *
  * @author LouiseB
  */
 @Entity
-public class Company implements Serializable
+public class Company extends InfoEntity
 {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     private String name;
     private String description;
     private int cvr;
@@ -37,14 +30,6 @@ public class Company implements Serializable
         this.cvr = cvr;
         this.numEmployees = numEmployees;
         this.marketValue = marketValue;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -86,10 +71,14 @@ public class Company implements Serializable
     public void setMarketValue(float marketValue) {
         this.marketValue = marketValue;
     }
+
     @Override
-    public String toString(){
-        return name+description+"cvr = "+cvr+": id="+id+": marketValue ="+marketValue+": Emplyees = "+numEmployees;
+    public String toString()
+    {
+        return "Company{" + "name=" + name + ", description=" + description + ", cvr=" + cvr + ", numEmployees=" + numEmployees + ", marketValue=" + marketValue + '}';
     }
+
+    
 
    
     
