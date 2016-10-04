@@ -1,6 +1,4 @@
-USE ca2pu;
-
-INSERT INTO PERSON (FIRSTNAME, LASTNAME) VALUES ('Louise', 'Nielsen');
-INSERT INTO PERSON (FIRSTNAME, LASTNAME) VALUES ('Emilie', 'Nielsen');
-INSERT INTO PERSON (FIRSTNAME, LASTNAME) VALUES ('Peter', 'Leo');
-INSERT INTO PERSON (FIRSTNAME, LASTNAME) VALUES ('Emil', 'Ulrik');
+INSERT INTO infoentity (FIRSTNAME, LASTNAME, `ADDRESS_ID`, `EMAIL`) VALUES ('Louise', 'Nielsen' ,1, 'mai@google.dk');
+INSERT INTO infoentity (FIRSTNAME, LASTNAME, `ADDRESS_ID`, `EMAIL`) VALUES ('Emilie', 'Nielsen',1, 'mymain@lol.dk');
+INSERT INTO infoentity (FIRSTNAME, LASTNAME, `ADDRESS_ID`, `EMAIL`) VALUES ('Peter', 'Leo',2,'mymain@lol.dk');
+INSERT INTO infoentity (FIRSTNAME, LASTNAME, `ADDRESS_ID`, `EMAIL`) VALUES ('Emil', 'Ulrik',3, 'mymain@lol.dk');

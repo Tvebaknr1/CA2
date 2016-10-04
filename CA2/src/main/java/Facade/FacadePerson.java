@@ -51,6 +51,7 @@ public class FacadePerson {
         try {
             em.getTransaction().begin();
             persons = em.createQuery("Select i from Person i").getResultList();
+
             em.getTransaction().commit();
             return persons;
         } finally {
