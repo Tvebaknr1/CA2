@@ -1,0 +1,4 @@
+USE ca2pu;
+CREATE TABLE person;
+CREATE TABLE company;
+INSERT INTO 
