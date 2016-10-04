@@ -50,7 +50,7 @@ public class FacadePerson {
 
         try {
             em.getTransaction().begin();
-            persons = em.createQuery("Select i from Person i").getResultList();
+            persons = em.createQuery("Select i from InfoEntity i").getResultList();
 
             em.getTransaction().commit();
             return persons;
@@ -66,7 +66,7 @@ public class FacadePerson {
         List<Person> persons = null;
         try {
             em.getTransaction().begin();
-            persons = em.createQuery("SELECT p1,c1 FROM Person p1 join Address c1 WHERE c1.id LIKE p1.address").setParameter("zipcode", zipCode).getResultList();
+            persons = em.createQuery("SELECT p1,c1 FROM InfoEntity p1 join Address c1 WHERE c1.id LIKE p1.address").getResultList();
                     //+ "SELECT p, z FROM Person p WHERE p.zip LIKE :zipcode INNER JOIN p1.neighbors c2").setParameter("zipcode", zipCode).getResultList();
             em.getTransaction().commit();
             return persons;
