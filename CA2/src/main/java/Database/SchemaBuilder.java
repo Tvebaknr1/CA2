@@ -22,7 +22,7 @@ public class SchemaBuilder
     {
         HashMap<String, Object> puProperties = new HashMap<>();
         Persistence.generateSchema("ca2pu", puProperties);
-
+        
     }
     
 }
