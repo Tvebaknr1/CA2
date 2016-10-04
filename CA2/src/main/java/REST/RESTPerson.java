@@ -6,15 +6,10 @@
 package REST;
 
 import Entity.Person;
-import Facade.FacadePerson;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import static java.util.Collections.list;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -37,10 +32,11 @@ import javax.ws.rs.core.MediaType;
 @Path("person")
 public class RESTPerson {
 
-    
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("ca2pu");
-    FacadePerson fp = new FacadePerson(emf);
-    
+    private static Map<Integer, Person> persons = new HashMap() {
+        {
+        }
+    };
+
     @Context
     private UriInfo context;
 
@@ -65,8 +61,7 @@ public class RESTPerson {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("complete")
     public String getPerson() {
-        List<Person> persons;
-        persons = fp.getPersons();
+        
         JsonObject Person = new JsonObject();
         for (int i = 0; i < persons.size(); i++) {
             Person.addProperty("Person", JSONConverter.getJSONFromPerson(persons.get(i)));
