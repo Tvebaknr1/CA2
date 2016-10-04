@@ -20,7 +20,7 @@ import org.junit.Test;
  * @author Emil
  */
 public class FacadePersonTest {
-    FacadePerson instance = new FacadePerson(Persistence.createEntityManagerFactory("ca2putest"));
+    FacadePerson instance = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));
     
     public FacadePersonTest() {
         
