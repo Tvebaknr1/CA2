@@ -64,10 +64,9 @@ public class FacadePerson {
         EntityManager em = emf.createEntityManager();
 
         List<Person> persons = null;
-
         try {
             em.getTransaction().begin();
-            persons = em.createQuery("SELECT c1, p1 FROM Person p1, CityInfo c1 ").getResultList();
+            persons = em.createQuery("SELECT p1,c1 FROM Person p1 join Address c1 WHERE c1.id LIKE p1.address").setParameter("zipcode", zipCode).getResultList();
                     //+ "SELECT p, z FROM Person p WHERE p.zip LIKE :zipcode INNER JOIN p1.neighbors c2").setParameter("zipcode", zipCode).getResultList();
             em.getTransaction().commit();
             return persons;
@@ -78,7 +77,7 @@ public class FacadePerson {
 
     public static void main(String[] args) {
         FacadePerson fp = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));
-        System.out.println(fp.getPersons(3600));
+        System.out.println(fp.getPersons());
     }
 
 }
