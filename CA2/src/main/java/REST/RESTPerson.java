@@ -109,53 +109,31 @@ public class RESTPerson {
 //        return jsonreponse;
 //    }
 //
-//    @PUT
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("{id}")
-//    public String putPerson(@PathParam("id") int id, String content) {
-//        JsonObject person = new JsonObject();
-//        Person jo = JSONConverter.getPersonFromJson(content);
-//        int temp = id;
-//        person.addProperty("id", temp);
-//        persons.put(temp, jo);
-//        person.addProperty("Person", JSONConverter.getJSONFromPerson(persons.get(temp - 1)));
-//        String jsonreponse = new Gson().toJson(person);
-//        return jsonreponse;
-//    }
-//
-//    @DELETE
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("{id}")
-//    public String deletePerson(@PathParam("id") int id) {
-//        JsonObject person = new JsonObject();
-//        int temp = id;
-//        person.addProperty("Person", JSONConverter.getJSONFromPerson(persons.get(temp)));
-//        persons.remove(id);
-//        String jsonreponse = new Gson().toJson(person);
-//        return jsonreponse;
-//    }
-//
-//    /**
-//     * Retrieves representation of an instance of rest1.ca2.RESTPerson
-//     *
-//     * @return an instance of java.lang.String
-//     */
-//    @GET
-//    @Produces(MediaType.APPLICATION_XML)
-//    public String getXml() {
-//        TODO return proper representation object
-//        throw new UnsupportedOperationException();
-//    }
-//
-//    /**
-//     * PUT method for updating or creating an instance of RESTPerson
-//     *
-//     * @param content representation for the resource
-//     */
-//    @PUT
-//    @Consumes(MediaType.APPLICATION_XML)
-//    public void putXml(String content) {
-//    }
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public String putPerson(@PathParam("id") int id, String content) {
+        JsonObject person = new JsonObject();
+        Person jo = JSONConverter.getPersonFromJson(content);
+        int temp = id;
+        person.addProperty("id", temp);
+        persons.put(temp, jo);
+        person.addProperty("Person", JSONConverter.getJSONFromPerson(persons.get(temp - 1)));
+        String jsonreponse = new Gson().toJson(person);
+        return jsonreponse;
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public String deletePerson(@PathParam("id") int id) {
+        JsonObject person = new JsonObject();
+        int temp = id;
+        person.addProperty("Person", JSONConverter.getJSONFromPerson(persons.get(temp)));
+        persons.remove(id);
+        String jsonreponse = new Gson().toJson(person);
+        return jsonreponse;
+    }
     }
