@@ -77,6 +77,7 @@ public class FacadePerson {
 
     public static void main(String[] args) {
         FacadePerson fp = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));
+        System.out.println(fp);
         System.out.println(fp.getPersons());
     }
 

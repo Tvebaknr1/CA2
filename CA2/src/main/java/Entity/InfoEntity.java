@@ -13,15 +13,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author LouiseB
  */
 @Entity
+@Table(name = "infoentity")
+@NamedQueries(
+        {
+            @NamedQuery(name = "infoentity.findAll", query = "SELECT i FROM infoentity i")
+        })
 public class InfoEntity implements Serializable
 {
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
