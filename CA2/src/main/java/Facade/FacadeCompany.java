@@ -14,48 +14,76 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author LouiseB
  */
-public class FacadeCompany {
+public class FacadeCompany
+{
 
     EntityManagerFactory emf;
 
-    public FacadeCompany(EntityManagerFactory emf) {
+    public FacadeCompany(EntityManagerFactory emf)
+    {
         this.emf = emf;
     }
 
-    public void setFactory(EntityManagerFactory emf) {
+    public void setFactory(EntityManagerFactory emf)
+    {
         this.emf = emf;
     }
 
-        public Company getCompany(String cvr) {
-
-
-        EntityManager em = emf.createEntityManager();
-
-        Company c = null;
-
-        try {
-            em.getTransaction().begin();
-            c = em.find(Company.class, cvr);
-            em.getTransaction().commit();
-            return c;
-        } finally {
-            em.close();
-        }
-    }
-
-    public List<Company> getCompanys() {
+    public List<Company> getCompanys(int cvr)
+    {
 
         EntityManager em = emf.createEntityManager();
 
         List<Company> companies = null;
 
-        try {
+        try
+        {
+            em.getTransaction().begin();
+            companies = em.createQuery("Select c from Company c where c.cvr = :cvr").setParameter("cvr", cvr).getResultList();
+            em.getTransaction().commit();
+            return companies;
+        } finally
+        {
+            em.close();
+        }
+    }
+
+    public List<Company> getCompanys()
+    {
+
+        EntityManager em = emf.createEntityManager();
+
+        List<Company> companies = null;
+
+        try
+        {
             em.getTransaction().begin();
             companies = em.createQuery("Select c from Company c").getResultList();
             em.getTransaction().commit();
             return companies;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
+
+    public Company deleteCompany(int id)
+    {
+        EntityManager em = emf.createEntityManager();
+
+        try
+        {
+            em.getTransaction().begin();
+            Company company = em.find(Company.class, id);
+            em.remove(company);
+            em.getTransaction().commit();
+            return company;
+        } finally
+        {
+            em.close();
+        }
+    }
+    
+
+
 }
