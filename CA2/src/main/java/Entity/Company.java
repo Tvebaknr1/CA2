@@ -86,6 +86,10 @@ public class Company implements Serializable
     public void setMarketValue(float marketValue) {
         this.marketValue = marketValue;
     }
+    @Override
+    public String toString(){
+        return name+description+"cvr = "+cvr+": id="+id+": marketValue ="+marketValue+": Emplyees = "+numEmployees;
+    }
 
    
     
