@@ -18,11 +18,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.Persistence;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -134,10 +138,7 @@ public class RESTPerson {
     public String putPerson(@PathParam("id") int id, String content) {
         JsonObject person = new JsonObject();
         Person jo = JSONConverter.getPersonFromJson(content);
-        int temp = id;
-        person.addProperty("id", temp);
-        persons.put(temp, jo);
-        person.addProperty("Person", JSONConverter.getJSONFromPerson(persons.get(temp - 1)));
+        fp.put(jo);
         String jsonreponse = new Gson().toJson(person);
         return jsonreponse;
     }
@@ -148,9 +149,7 @@ public class RESTPerson {
     @Path("{id}")
     public String deletePerson(@PathParam("id") int id) {
         JsonObject person = new JsonObject();
-        int temp = id;
-        person.addProperty("Person", JSONConverter.getJSONFromPerson(persons.get(temp)));
-        persons.remove(id);
+        fp.removePersonbyid(id);
         String jsonreponse = new Gson().toJson(person);
         return jsonreponse;
     }
