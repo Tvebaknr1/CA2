@@ -66,7 +66,7 @@ public class RESTPerson {
 //    }
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("complete")
+    @Path("all")
     public String getPerson() {
 
         List<JsonObject> Persons = new ArrayList<>();
