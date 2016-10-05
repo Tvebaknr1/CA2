@@ -141,7 +141,7 @@ public class FacadePerson
         {
             p = em.find(Person.class, id);
             em.getTransaction().begin();
-            em.refresh(p);
+            em.remove(p);
             em.getTransaction().commit();
             return p;
         } finally

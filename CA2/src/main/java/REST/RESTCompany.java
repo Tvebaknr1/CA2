@@ -47,7 +47,8 @@ public class RESTCompany
     public String getAllCompanies() throws RuntimeException
     {
         System.out.println("get all companies");
-        return new Gson().toJson(facadeCompany.getAllCompanies());
+        List<Company> com = facadeCompany.getAllCompanies();
+        return new Gson().toJson(com);
     }
 
     @GET

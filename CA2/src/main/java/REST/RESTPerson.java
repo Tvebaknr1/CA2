@@ -140,10 +140,10 @@ public class RESTPerson {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public String deleteCompany(@PathParam("id") int id) throws RuntimeException
+    public String deletePerson(@PathParam("id") int id) throws RuntimeException
     {
-        System.out.println("deletePerson");
+        System.out.println("delete person");
 
-        return new Gson().toJson(fp.deletePerson(id));
+        return new Gson().toJson(fp.removePersonbyid(id));
     }
     }
