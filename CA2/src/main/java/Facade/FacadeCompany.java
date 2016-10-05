@@ -67,24 +67,6 @@ public class FacadeCompany
         }
     }
 
-//    public List<Company> getCompaniesByNumber(int number)
-//    {
-//
-//        EntityManager em = emf.createEntityManager();
-//
-//        List<Company> companies = null;
-//
-//        try
-//        {
-//            em.getTransaction().begin();
-//            companies = em.createQuery("Select c from Company c where c.number = :number").setParameter("cvr", number).getResultList();
-//            em.getTransaction().commit();
-//            return companies;
-//        } finally
-//        {
-//            em.close();
-//        }
-//    }
     public Company deleteCompany(int id)
     {
         EntityManager em = emf.createEntityManager();
@@ -120,7 +102,7 @@ public class FacadeCompany
 
     public List<Company> getCompaniesByMarketValue(int markV)
     {
-         EntityManager em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
         List<Company> companies = null;
 
@@ -136,4 +118,36 @@ public class FacadeCompany
         }
     }
 
+    public Company getCompanyByName(String name)
+    {
+        EntityManager em = emf.createEntityManager();
+        List<Company> company = null;
+
+        try
+        {
+            em.getTransaction().begin();
+            company = em.createQuery("Select c from Company c where c.name = :name").setParameter("name", name).getResultList();
+            em.getTransaction().commit();
+            return company.get(0);
+        } finally
+        {
+            em.close();
+        }
+    }
+
+    public Company addCompany(Company company)
+    {
+        EntityManager em = emf.createEntityManager();
+
+        try
+        {
+            em.getTransaction().begin();
+            em.persist(company);
+            em.getTransaction().commit();
+            return company;
+        } finally
+        {
+            em.close();
+        }
+    }
 }

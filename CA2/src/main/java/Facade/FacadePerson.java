@@ -17,64 +17,76 @@ import javax.persistence.Query;
  *
  * @author Emil
  */
-public class FacadePerson {
+public class FacadePerson
+{
 
     EntityManagerFactory emf;
 
-    public FacadePerson(EntityManagerFactory emf) {
+    public FacadePerson(EntityManagerFactory emf)
+    {
         System.out.println("test 2");
         this.emf = emf;
     }
 
-    public void setFactory(EntityManagerFactory emf) {
+    public void setFactory(EntityManagerFactory emf)
+    {
         this.emf = emf;
     }
 
-    public Person getPerson(int phone) {
+    public Person getPerson(int phone)
+    {
 
         EntityManager em = emf.createEntityManager();
 
         Person p = null;
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             p = em.find(Person.class, phone);
             em.getTransaction().commit();
             return p;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
-    public Person getPersonbyid(int id) {
+    public Person getPersonbyid(int id)
+    {
 
         EntityManager em = emf.createEntityManager();
 
         Person p = null;
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             p = em.find(Person.class, id);
             em.getTransaction().commit();
             return p;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
-      public List<Person> getPersonByName(String firstName) {
+    public List<Person> getPersonByName(String firstName)
+    {
         EntityManager em = emf.createEntityManager();
 
         List<Person> persons = null;
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             Query query = em.createQuery("SELECT i FROM Person i WHERE i.firstName LIKE :firstName");
             query.setParameter("firstName", firstName);
             persons = query.getResultList();
             em.getTransaction().commit();
             return persons;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
@@ -103,18 +115,21 @@ public class FacadePerson {
         }
     }
 
-    public List<Person> getPersons() {
+    public List<Person> getPersons()
+    {
         EntityManager em = emf.createEntityManager();
 
         List<Person> persons = null;
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             persons = em.createQuery("Select i from Person i").getResultList();
 
             em.getTransaction().commit();
             return persons;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
@@ -134,36 +149,60 @@ public class FacadePerson {
 //            em.close();
 //        }
 //    }
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         FacadePerson fp = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));
         System.out.println(fp.getPersons());
     }
 
-    public Person removePersonbyid(int id) {
+    public Person removePersonbyid(int id)
+    {
 
         EntityManager em = emf.createEntityManager();
 
         Person p = null;
 
-        try {
+        try
+        {
             p = em.find(Person.class, id);
             em.getTransaction().begin();
             em.refresh(p);
             em.getTransaction().commit();
             return p;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
-    public void put(Person jo) {
+    public void put(Person jo)
+    {
         EntityManager em = emf.createEntityManager();
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             em.persist(jo);
             em.getTransaction().commit();
-        } finally {
+        } finally
+        {
+            em.close();
+        }
+    }
+
+    public Person deletePerson(int id)
+    {
+        EntityManager em = emf.createEntityManager();
+
+        try
+        {
+            em.getTransaction().begin();
+            Person person = em.find(Person.class, id);
+            em.remove(person);
+            em.getTransaction().commit();
+            return person;
+        } finally
+        {
             em.close();
         }
     }
