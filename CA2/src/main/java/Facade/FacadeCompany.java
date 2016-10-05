@@ -85,7 +85,6 @@ public class FacadeCompany
 //            em.close();
 //        }
 //    }
-
     public Company deleteCompany(int id)
     {
         EntityManager em = emf.createEntityManager();
@@ -97,6 +96,40 @@ public class FacadeCompany
             em.remove(company);
             em.getTransaction().commit();
             return company;
+        } finally
+        {
+            em.close();
+        }
+    }
+
+    public Company getCompanyById(int id)
+    {
+        EntityManager em = emf.createEntityManager();
+
+        try
+        {
+            em.getTransaction().begin();
+            Company company = em.find(Company.class, id);
+            em.getTransaction().commit();
+            return company;
+        } finally
+        {
+            em.close();
+        }
+    }
+
+    public List<Company> getCompaniesByMarketValue(int markV)
+    {
+         EntityManager em = emf.createEntityManager();
+
+        List<Company> companies = null;
+
+        try
+        {
+            em.getTransaction().begin();
+            companies = em.createQuery("Select c from Company c where c.marketValue = :marketValue").setParameter("marketValue", markV).getResultList();
+            em.getTransaction().commit();
+            return companies;
         } finally
         {
             em.close();
