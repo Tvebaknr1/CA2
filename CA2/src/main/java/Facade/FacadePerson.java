@@ -166,6 +166,22 @@ public class FacadePerson {
             em.close();
         }
     }
+    
+    public Person addPerson(Person person)
+    {
+        EntityManager em = emf.createEntityManager();
+
+        try
+        {
+            em.getTransaction().begin();
+            em.persist(person);
+            em.getTransaction().commit();
+            return person;
+        } finally
+        {
+            em.close();
+        }
+    }
 
 //    public List<Person> getPersonsbyzipcode(int zipCode) {
 //

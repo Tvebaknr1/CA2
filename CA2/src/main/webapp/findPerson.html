@@ -6,11 +6,14 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Find persons</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="designScript.js" type="text/javascript"></script>
         <link href="pageCSS.css" rel="stylesheet" type="text/css"/>
+        <script src="jquery-3.1.0.min.js" type="text/javascript"></script>
+        <script src="scriptPerson.js" type="text/javascript"></script>
+
     </head>
     <body>
         <ul>
@@ -25,11 +28,16 @@ and open the template in the editor.
                 </div>
             </li>
         </ul>
-        <div class="content">
-        <h1>Hello CA2!</h1>
-        <div id="authors"> Peter Lange, Emil Christoffersen, Emilie Nielsen, Louise Nielsen </div>
-        <div id="class">A</div>
-        <div id= "group"> Group number </div>
-        </div>
+        <h1>Find personer</h1>
+        <button id="showAll">Vis alle</button>
+        <div id="all"></div>
+        <table>
+            <tr>
+                <th>Fornavn</th>
+                <th>Efternavn</th>
+                <th>E-mail</th>
+                <th>Adresse</th>
+            </tr>
+        </table>
     </body>
 </html>
