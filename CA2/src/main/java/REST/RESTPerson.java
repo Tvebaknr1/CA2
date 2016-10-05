@@ -9,25 +9,18 @@ import Entity.Person;
 import Facade.FacadePerson;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.persistence.Persistence;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 
 /**
  * REST Web Service
@@ -136,26 +129,25 @@ public class RESTPerson {
 //        return jsonreponse;
 //    }
 //
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("{id}")
-    public String putPerson(@PathParam("id") int id, String content) {
-        JsonObject person = new JsonObject();
-        Person jo = JSONConverter.getPersonFromJson(content);
-        fp.put(jo);
-        String jsonreponse = new Gson().toJson(person);
-        return jsonreponse;
-    }
+//    @PUT
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Path("{id}")
+//    public String putPerson(@PathParam("id") int id, String content) {
+//        JsonObject person = new JsonObject();
+//        Person jo = JSONConverter.getPersonFromJson(content);
+//        fp.put(jo);
+//        String jsonreponse = new Gson().toJson(person);
+//        return jsonreponse;
+//    }
 
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public String deletePerson(@PathParam("id") int id) {
-        JsonObject person = new JsonObject();
-        fp.removePersonbyid(id);
-        String jsonreponse = new Gson().toJson(person);
-        return jsonreponse;
+    public String deleteCompany(@PathParam("id") int id) throws RuntimeException
+    {
+        System.out.println("deletePerson");
+
+        return new Gson().toJson(fp.deletePerson(id));
     }
     }
