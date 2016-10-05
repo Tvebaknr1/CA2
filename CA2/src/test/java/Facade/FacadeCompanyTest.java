@@ -27,14 +27,13 @@ public class FacadeCompanyTest
     public FacadeCompanyTest()
     {
         facadeCompany = new FacadeCompany(Persistence.createEntityManagerFactory("ca2pu"));
-        
-        
+
     }
 
     @BeforeClass
     public static void setUpClass()
     {
-        
+
     }
 
     @AfterClass
@@ -62,9 +61,12 @@ public class FacadeCompanyTest
         int cvr = 2700;
         List<Company> expResult = facadeCompany.getCompaniesByCVR(cvr);
         List<Company> result = facadeCompany.getCompaniesByCVR(cvr);
-        for (int i = 0; i < result.size(); i++) {
+
+        for (int i = 0; i < result.size(); i++)
+        {
             assertEquals(expResult.get(i).toString(), result.get(i).toString());
-        }    }
+        }
+    }
 
     /**
      * Test of getCompanys method, of class FacadeCompany.
@@ -75,9 +77,20 @@ public class FacadeCompanyTest
         System.out.println("getCompanys");
         List<Company> expResult = facadeCompany.getAllCompanies();
         List<Company> result = facadeCompany.getAllCompanies();
-        for (int i = 0; i < result.size(); i++) {
+        for (int i = 0; i < result.size(); i++)
+        {
             assertEquals(expResult.get(i).toString(), result.get(i).toString());
         }
     }
+//    
+//    @Test
+//    public void testDeleteCompany()
+//    {
+//        System.out.println("deleteCompany");
+//        Company company = facadeCompany.deleteCompany(1);
+//        assertNotNull(company);
+//        company = facadeCompany.deleteCompany(1);
+//        assertNull(company);
+//    }
 
 }

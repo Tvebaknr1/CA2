@@ -51,8 +51,11 @@ public class FacadePersonTest {
         int id = 5;
         Person expResult = new Person("Louise", "Nielsen");
         expResult.setEmail("louise@gmail.dk");
+        Person expResult1 = new Person("Louise", "Nielsen");
+        expResult1.setEmail("louise@gmail.com");
         Person result = facadePerson.getPerson(id);
         assertEquals(expResult.toString(), result.toString());
+        assertNotEquals(expResult1, result);
     }
 
     /**
@@ -68,17 +71,5 @@ public class FacadePersonTest {
         }
         
     }
-
-//    /**
-//     * Test of getPersons method, of class FacadePerson.
-//     */
-//    @Test
-//    public void testGetPersons_int() {
-//        System.out.println("getPersons");
-//        int zipCode = 3600;
-//        List<Person> expResult = null;
-//        List<Person> result = instance.getPersonsbyzipcode(zipCode);
-//        assertEquals(expResult, result);
-//    }
     
 }
