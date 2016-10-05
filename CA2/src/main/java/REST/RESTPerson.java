@@ -134,11 +134,6 @@ public class RESTPerson {
 //        String jsonreponse = new Gson().toJson(person);
 //        return jsonreponse;
 //    }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 73b7ce6900dae05aaf0a28550e7f5fddbad6c616
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
