@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -63,6 +64,26 @@ public class FacadePerson
             p = em.find(Person.class, id);
             em.getTransaction().commit();
             return p;
+        } finally
+        {
+            em.close();
+        }
+    }
+
+    public List<Person> getPersonByName(String firstName)
+    {
+        EntityManager em = emf.createEntityManager();
+
+        List<Person> persons = null;
+
+        try
+        {
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT i FROM Person i WHERE i.firstName LIKE :firstName");
+            query.setParameter("firstName", firstName);
+            persons = query.getResultList();
+            em.getTransaction().commit();
+            return persons;
         } finally
         {
             em.close();

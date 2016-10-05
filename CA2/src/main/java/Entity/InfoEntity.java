@@ -20,65 +20,50 @@ import javax.persistence.OneToMany;
  * @author LouiseB
  */
 @Entity
-public class InfoEntity implements Serializable
-{
+public class InfoEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String email;
-    
+
     @OneToMany(mappedBy = "infoEntity")
     List<Phone> phones = new ArrayList();
-    
-    List<Address> addresses = new ArrayList();
-    
+
+    //List<Address> addresses = new ArrayList();
     @ManyToOne
     private Address address;
 
-
-    public InfoEntity()
-    {
+    public InfoEntity() {
     }
 
-    public InfoEntity(String email)
-    {
+    public InfoEntity(String email) {
         this.email = email;
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
-    
-    public List getPhones()
-    {
+
+    public List getPhones() {
         List<String> list = new ArrayList();
-        for(Phone p : phones)
-        {
+        for (Phone p : phones) {
             list.add(p.getDescription() + p.getNumber());
         }
         return list;
     }
 
-    public List<String> getAddresses()
-    {
-        List<String> list = new ArrayList();
-        for(Address a : addresses)
-        {
-            list.add(a.getStreet() + " "  + a.getAdditionalInfo());
-        }
-        return list;
+    public String getAddresses() {
+        return address.getStreet() + " " + address.getAdditionalInfo();
+
     }
-    
+
 }
