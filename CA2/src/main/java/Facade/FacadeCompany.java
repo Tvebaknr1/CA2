@@ -29,26 +29,7 @@ public class FacadeCompany
         this.emf = emf;
     }
 
-    public List<Company> getCompanys(int cvr)
-    {
-
-        EntityManager em = emf.createEntityManager();
-
-        List<Company> companies = null;
-
-        try
-        {
-            em.getTransaction().begin();
-            companies = em.createQuery("Select c from Company c where c.cvr = :cvr").setParameter("cvr", cvr).getResultList();
-            em.getTransaction().commit();
-            return companies;
-        } finally
-        {
-            em.close();
-        }
-    }
-
-    public List<Company> getCompanys()
+    public List<Company> getAllCompanies()
     {
 
         EntityManager em = emf.createEntityManager();
@@ -67,6 +48,44 @@ public class FacadeCompany
         }
     }
 
+    public List<Company> getCompaniesByCVR(int cvr)
+    {
+
+        EntityManager em = emf.createEntityManager();
+
+        List<Company> companies = null;
+
+        try
+        {
+            em.getTransaction().begin();
+            companies = em.createQuery("Select c from Company c where c.cvr = :cvr").setParameter("cvr", cvr).getResultList();
+            em.getTransaction().commit();
+            return companies;
+        } finally
+        {
+            em.close();
+        }
+    }
+
+//    public List<Company> getCompaniesByNumber(int number)
+//    {
+//
+//        EntityManager em = emf.createEntityManager();
+//
+//        List<Company> companies = null;
+//
+//        try
+//        {
+//            em.getTransaction().begin();
+//            companies = em.createQuery("Select c from Company c where c.number = :number").setParameter("cvr", number).getResultList();
+//            em.getTransaction().commit();
+//            return companies;
+//        } finally
+//        {
+//            em.close();
+//        }
+//    }
+
     public Company deleteCompany(int id)
     {
         EntityManager em = emf.createEntityManager();
@@ -83,7 +102,5 @@ public class FacadeCompany
             em.close();
         }
     }
-    
-
 
 }

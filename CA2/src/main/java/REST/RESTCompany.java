@@ -39,20 +39,36 @@ public class RESTCompany {
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllPersons()
+    public String getAllCompanies()
     {
-        System.out.println("get all persons");
-        return new Gson().toJson(facadeCompany.getCompanys());
+        System.out.println("get all companies");
+        return new Gson().toJson(facadeCompany.getAllCompanies());
     }
 
     @GET
-    @Path("{id}")
+    @Path("{cvr}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonsFromCVR(@PathParam("id") int cvr)
+    public String getCompaniesByCVR(@PathParam("cvr") int cvr) throws RuntimeException//throws NotFoundExceptionMapper
     {
         System.out.println("get persons with cvr");
-        return new Gson().toJson(facadeCompany.getCompanys(cvr));
-    }    
+        if(facadeCompany.getCompaniesByCVR(cvr) == null)
+        {
+            throw new RuntimeException();
+        }
+        
+            return new Gson().toJson(facadeCompany.getCompaniesByCVR(cvr));
+   
+        
+    }  
+    
+//    @GET
+//    @Path("{id}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public String getCompaniesByNumber(@PathParam("id") int number)
+//    {
+//        System.out.println("get persons with cvr");
+//        return new Gson().toJson(facadeCompany.getCompaniesByCVR(number));
+//    }
     
     
     @DELETE
