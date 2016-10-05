@@ -109,6 +109,23 @@ public class RESTPerson {
         }
         return new Gson().toJson(Persons);
     }
+    
+    @GET
+    @Path("phone/{phone}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersonByPhone(@PathParam("phone") int phone) {
+        List<JsonObject> Persons = new ArrayList<>();
+        List<Person> list = fp.getPersonByPhone(phone);
+        for (Person person : list) {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("firstName", person.getFirstName());
+            jsonObject.addProperty("lastName", person.getLastName());
+            jsonObject.addProperty("email", person.getEmail());
+            jsonObject.addProperty("address", new Gson().toJson(person.getAddresses()));
+            Persons.add(jsonObject);
+        }
+        return new Gson().toJson(Persons);
+    }
 
 //    @GET
 //    @Produces(MediaType.APPLICATION_JSON)
