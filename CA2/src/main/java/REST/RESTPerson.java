@@ -32,11 +32,9 @@ import javax.ws.rs.core.UriInfo;
 @Path("person")
 public class RESTPerson {
 
-
     public RESTPerson(UriInfo context) {
         this.context = context;
     }
-
 
     @Context
     private UriInfo context;
@@ -59,6 +57,7 @@ public class RESTPerson {
 //        String jsonreponse = new Gson().toJson(person);
 //        return jsonreponse;
 //    }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
@@ -66,8 +65,7 @@ public class RESTPerson {
 
         List<JsonObject> Persons = new ArrayList<>();
         List<Person> list = fp.getPersons();
-        for (Person person: list )
-        {
+        for (Person person : list) {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("firstName", person.getFirstName());
             jsonObject.addProperty("lastName", person.getLastName());
@@ -81,12 +79,10 @@ public class RESTPerson {
     @GET
     @Path("firstname/{firstName}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPerson(@PathParam("firstName") String firstName) 
-    {
+    public String getPersonByFirstname(@PathParam("firstName") String firstName) {
         List<JsonObject> Persons = new ArrayList<>();
         List<Person> list = fp.getPersonByName(firstName);
-        for (Person person: list )
-        {
+        for (Person person : list) {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("firstName", person.getFirstName());
             jsonObject.addProperty("lastName", person.getLastName());
@@ -97,6 +93,22 @@ public class RESTPerson {
         return new Gson().toJson(Persons);
     }
 
+    @GET
+    @Path("zip/{zip}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersonByZip(@PathParam("zip") int zip) {
+        List<JsonObject> Persons = new ArrayList<>();
+        List<Person> list = fp.getPersonByZip(zip);
+        for (Person person : list) {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("firstName", person.getFirstName());
+            jsonObject.addProperty("lastName", person.getLastName());
+            jsonObject.addProperty("email", person.getEmail());
+            jsonObject.addProperty("address", new Gson().toJson(person.getAddresses()));
+            Persons.add(jsonObject);
+        }
+        return new Gson().toJson(Persons);
+    }
 
 //    @GET
 //    @Produces(MediaType.APPLICATION_JSON)
@@ -122,8 +134,6 @@ public class RESTPerson {
 //        String jsonreponse = new Gson().toJson(person);
 //        return jsonreponse;
 //    }
-
-
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -146,4 +156,4 @@ public class RESTPerson {
 
         return new Gson().toJson(fp.removePersonbyid(id));
     }
-    }
+}

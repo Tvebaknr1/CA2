@@ -65,5 +65,10 @@ public class InfoEntity implements Serializable {
         return address.getStreet() + " " + address.getAdditionalInfo();
 
     }
+    
+    public Address getAddress()
+    {
+        return address;
+    }
 
 }

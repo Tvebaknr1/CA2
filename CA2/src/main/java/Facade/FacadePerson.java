@@ -6,6 +6,7 @@
 package Facade;
 
 import Entity.Person;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -86,6 +87,30 @@ public class FacadePerson
             return persons;
         } finally
         {
+            em.close();
+        }
+    }
+
+      public List<Person> getPersonByZip(int zip) {
+        EntityManager em = emf.createEntityManager();
+
+        List<Person> persons = null;
+
+        try {
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT i FROM Person i ");
+            persons = query.getResultList();
+            em.getTransaction().commit();
+            List <Person> p = new ArrayList();
+            for(Person person : persons)
+            {
+                if(person.getAddress().getCityInfo().getZip() == zip)
+                {
+                    p.add(person);
+                }
+            }
+            return p;
+        } finally {
             em.close();
         }
     }
