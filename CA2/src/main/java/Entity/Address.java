@@ -35,6 +35,10 @@ public class Address implements Serializable
     @ManyToOne
     private CityInfo cityInfo;
 
+    public CityInfo getCityInfo() {
+        return cityInfo;
+    }
+
     public Address()
     {
     }
