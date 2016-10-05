@@ -26,6 +26,10 @@ public class Person extends InfoEntity {
     @ManyToMany
     List<Hobby> hobbies = new ArrayList();
 
+    public List<Hobby> getHobbies() {
+        return hobbies;
+    }
+
     public Person() {
     }
 

@@ -5,6 +5,7 @@
  */
 package Facade;
 
+import Entity.Hobby;
 import Entity.Person;
 import Entity.Phone;
 import java.util.ArrayList;
@@ -102,6 +103,7 @@ public class FacadePerson {
         }
     }
 
+    
     public List<Person> getPersonByPhone(int phonenr) {
         EntityManager em = emf.createEntityManager();
 
@@ -125,7 +127,30 @@ public class FacadePerson {
             em.close();
         }
     }
+    public List<Person> getPersonByHobby(String hobbyname) {
+        EntityManager em = emf.createEntityManager();
 
+        List<Person> persons = null;
+
+        try {
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT i FROM Person i ");
+            persons = query.getResultList();
+            em.getTransaction().commit();
+            List<Person> p = new ArrayList();
+            for (Person person : persons) {
+                for (Hobby hobby : person.getHobbies()) {
+                    if (hobby.getName().toLowerCase().equals(hobbyname.toLowerCase())) {
+                        p.add(person);
+                    }
+                }
+            }
+            return p;
+        } finally {
+            em.close();
+        }
+    }
+    
     public List<Person> getPersons() {
         EntityManager em = emf.createEntityManager();
 
