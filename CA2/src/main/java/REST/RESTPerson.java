@@ -78,7 +78,6 @@ public class RESTPerson {
             jsonObject.addProperty("lastName", person.getLastName());
             jsonObject.addProperty("email", person.getEmail());
             jsonObject.addProperty("address", new Gson().toJson(person.getAddresses()));
-            jsonObject.addProperty("phone", new Gson().toJson(person.getPhones()));
             Persons.add(jsonObject);
         }
 //
@@ -135,7 +134,7 @@ public class RESTPerson {
 //        String jsonreponse = new Gson().toJson(person);
 //        return jsonreponse;
 //    }
-//
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
