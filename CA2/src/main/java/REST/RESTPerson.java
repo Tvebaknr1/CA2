@@ -80,35 +80,28 @@ public class RESTPerson {
             jsonObject.addProperty("address", new Gson().toJson(person.getAddresses()));
             Persons.add(jsonObject);
         }
-//
-//        List<Person> Persons;
-//        Persons = fp.getPersons();
-//        System.out.println(" fuck you>" + Persons.size());
-//        JsonObject Person = new JsonObject();
-//        String str
-//                    = "{\"Person\": [";
-//        for (int i = 0; i < Persons.size(); i++) {
-//            
-//                   //str += JSONConverter.getJSONFromPerson(Persons.get(i));
-//                   
-//            
-//        }
-//        str +=  "]}";
-//        String jsonreponse = new Gson().toJson(Person);
-
         return new Gson().toJson(Persons);
     }
-//
-//    @GET
-//    @Path("{id}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public String getPerson(@PathParam("id") int id) 
-//    {
-//        System.out.println("getPerson");
-//        Person p = facadePerson.getPerson(id);
-//        return new Gson().toJson(facadePerson.getPerson(id));
-//    }
-//
+
+    @GET
+    @Path("firstname/{firstName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPerson(@PathParam("firstName") String firstName) 
+    {
+        List<JsonObject> Persons = new ArrayList<>();
+        List<Person> list = fp.getPersonByName(firstName);
+        for (Person person: list )
+        {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("firstName", person.getFirstName());
+            jsonObject.addProperty("lastName", person.getLastName());
+            jsonObject.addProperty("email", person.getEmail());
+            jsonObject.addProperty("address", new Gson().toJson(person.getAddresses()));
+            Persons.add(jsonObject);
+        }
+        return new Gson().toJson(Persons);
+    }
+
 
 //    @GET
 //    @Produces(MediaType.APPLICATION_JSON)

@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -45,6 +46,7 @@ public class FacadePerson {
             em.close();
         }
     }
+
     public Person getPersonbyid(int id) {
 
         EntityManager em = emf.createEntityManager();
@@ -60,6 +62,24 @@ public class FacadePerson {
             em.close();
         }
     }
+
+      public List<Person> getPersonByName(String firstName) {
+        EntityManager em = emf.createEntityManager();
+
+        List<Person> persons = null;
+
+        try {
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT i FROM Person i WHERE i.firstName LIKE :firstName");
+            query.setParameter("firstName", firstName);
+            persons = query.getResultList();
+            em.getTransaction().commit();
+            return persons;
+        } finally {
+            em.close();
+        }
+    }
+
 
     public List<Person> getPersons() {
         EntityManager em = emf.createEntityManager();
@@ -92,11 +112,11 @@ public class FacadePerson {
 //            em.close();
 //        }
 //    }
-
     public static void main(String[] args) {
         FacadePerson fp = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));
         System.out.println(fp.getPersons());
     }
+
     public Person removePersonbyid(int id) {
 
         EntityManager em = emf.createEntityManager();
@@ -116,7 +136,6 @@ public class FacadePerson {
 
     public void put(Person jo) {
         EntityManager em = emf.createEntityManager();
-
 
         try {
             em.getTransaction().begin();
