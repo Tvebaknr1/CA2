@@ -5,8 +5,11 @@
  */
 package REST;
 
+import Entity.Company;
 import Facade.FacadeCompany;
+import RESTException.CompanyNotFoundException;
 import com.google.gson.Gson;
+import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -39,115 +42,76 @@ public class RESTCompany {
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllCompanies()
+    public String getAllCompanies() throws RuntimeException
     {
         System.out.println("get all companies");
         return new Gson().toJson(facadeCompany.getAllCompanies());
     }
+    
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getCompany(@PathParam("id") int id) throws CompanyNotFoundException
+    {
+        System.out.println("get company by id");
+        
+        Company company = facadeCompany.getCompanyById(id);
+        System.out.println(company);
+        if(company == null)
+        {
+            throw new CompanyNotFoundException();
+        }
+        return new Gson().toJson(company);
+    }
 
     @GET
-    @Path("{cvr}")
+    @Path("cvr/{cvr}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCompaniesByCVR(@PathParam("cvr") int cvr) throws RuntimeException//throws NotFoundExceptionMapper
+    public String getCompaniesByCVR(@PathParam("cvr") int cvr) throws CompanyNotFoundException
     {
-        System.out.println("get persons with cvr");
-        if(facadeCompany.getCompaniesByCVR(cvr) == null)
+        System.out.println("get company with cvr");
+        List<Company> company = facadeCompany.getCompaniesByCVR(cvr);
+        System.out.println(company);
+        if(company.isEmpty())
         {
-            throw new RuntimeException();
+            System.out.println("fejl printes");
+           throw new CompanyNotFoundException();
         }
         
-            return new Gson().toJson(facadeCompany.getCompaniesByCVR(cvr));
-   
-        
-    }  
+            return new Gson().toJson(company);
+    }    
     
-//    @GET
-//    @Path("{id}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public String getCompaniesByNumber(@PathParam("id") int number)
-//    {
-//        System.out.println("get persons with cvr");
-//        return new Gson().toJson(facadeCompany.getCompaniesByCVR(number));
-//    }
-    
-    
-    @DELETE
+    @GET
+    @Path("marketvalue/{marketvalue}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("{id}")
-    public void deleteCompany(@PathParam("id") int id)
+    public String getCompaniesByMarketValue(@PathParam("marketvalue") int markV) throws CompanyNotFoundException
     {
-        System.out.println("deletePerson");
-        new Gson().toJson(facadeCompany.deleteCompany(id));
-    }
-}
-
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("{contactinfo}")
-//    public String getCompany(@PathParam("contactinfo") int contactinfo, @DefaultValue("None") @QueryParam("job") String job) {
-//        JsonObject Company = new JsonObject();
-//        int key = contactinfo;
-//        Company.addProperty("Company", JSONConverter.getJSONFromCompany(companies.get(key)));
-//        String jsonreponse = new Gson().toJson(Company);
-//        return jsonreponse;
-//    }
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("Complete")
-//    public String getCompany() {
-//        JsonObject Company = new JsonObject();
-//        for (int i = 0; i < companies.size(); i++) {
-//            Company.addProperty("Company", JSONConverter.getJSONFromCompany(companies.get(i)));
-//        }
-//        String jsonreponse = new Gson().toJson(Company);
-//        return jsonreponse;
-//    }
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("Complete/id")
-//    public String getCompanyid() {
-//        JsonObject Company = new JsonObject();
-//        for (int i = 0; i < companies.size(); i++) {
-//            Company.addProperty("Company", JSONConverter.getJSONFromint(companies.get(i).getId()));
-//        }
-//        String jsonreponse = new Gson().toJson(Company);
-//        return jsonreponse;
-//    }
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("{contactinfo/id}")
-//    public String getCompanyid(@PathParam("contactinfo") int contactinfo, @DefaultValue("None") @QueryParam("job") String job) {
-//        JsonObject Company = new JsonObject();
-//        int key = contactinfo;
-//        Company.addProperty("Company", JSONConverter.getJSONFromint(companies.get(key).getId()));
-//        String jsonreponse = new Gson().toJson(Company);
-//        return jsonreponse;
-//    }
+        System.out.println("get company with market value");
+        List<Company> company = facadeCompany.getCompaniesByMarketValue(markV);
+        System.out.println(company);
+        if(company.isEmpty())
+        {
+            System.out.println("fejl printes");
+           throw new CompanyNotFoundException();
+        }
+        
+            return new Gson().toJson(company);
+    } 
+//    
 //    @POST
 //    @Consumes(MediaType.APPLICATION_JSON)
 //    @Produces(MediaType.APPLICATION_JSON)
-//    public String postPerson(String content) {
-//        JsonObject company = new JsonObject();
-//        Company jo = JSONConverter.getCompanyFromJson(content);
-//        int temp = company.size();
-//        company.addProperty("id", temp);
-//        companies.put(temp, jo);
-//        company.addProperty("Company", JSONConverter.getJSONFromCompany(companies.get(temp - 1)));
-//        String jsonreponse = new Gson().toJson(company);
-//        return jsonreponse;
-//    }
-//    @PUT
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("{id}")
-//    public String putPerson(@PathParam("id") int id, String content) {
-//        JsonObject company = new JsonObject();
-//        Company jo = JSONConverter.getCompanyFromJson(content);
-//        int temp = id;
-//        company.addProperty("id", temp);
-//        companies.put(temp, jo);
-//        company.addProperty("Company", JSONConverter.getJSONFromCompany(companies.get(temp - 1)));
-//        String jsonreponse = new Gson().toJson(company);
-//        return jsonreponse;
-//    }
+//    
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public String deleteCompany(@PathParam("id") int id) throws RuntimeException
+    {
+        System.out.println("deletePerson");
+        
+        return new Gson().toJson(facadeCompany.deleteCompany(id));
+    }
+}
+
+
 

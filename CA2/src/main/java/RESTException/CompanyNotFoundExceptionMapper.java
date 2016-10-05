@@ -30,7 +30,7 @@ public class CompanyNotFoundExceptionMapper implements ExceptionMapper<CompanyNo
     @Override
     public Response toResponse(CompanyNotFoundException e)
     {
-        boolean isDebug = context.getInitParameter("debug").equals("true");
+        boolean isDebug = false;
 
         ErrorMessage err = new ErrorMessage(e, 404, isDebug);
         err.setDescription("Company with requested id not found");

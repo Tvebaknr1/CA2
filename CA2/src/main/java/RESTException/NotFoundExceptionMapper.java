@@ -31,7 +31,8 @@ public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundExceptio
     @Override
     public Response toResponse(NotFoundException e)
     {
-        boolean isDebug = context.getInitParameter("debug").equals("true");
+        boolean isDebug = false;
+       // isDebug = context.getInitParameter("debug").equals("true");
 
         ErrorMessage err = new ErrorMessage(e, 404, isDebug);
         err.setDescription("The requested service does not exist");

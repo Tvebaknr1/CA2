@@ -29,7 +29,7 @@ public class RuntimeExceptionMapper implements ExceptionMapper<RuntimeException>
     @Override
     public Response toResponse(RuntimeException e)
     {
-        boolean isDebug = context.getInitParameter("debug").equals("true");
+        boolean isDebug = false;
 
         ErrorMessage err = new ErrorMessage(e, 500, isDebug);
         err.setDescription("Internal Server Problem. We are sorry for the inconvenience");
