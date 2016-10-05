@@ -5,6 +5,7 @@
  */
 package REST;
 
+import Entity.Company;
 import Entity.Person;
 import Facade.FacadePerson;
 import com.google.gson.Gson;
@@ -16,6 +17,7 @@ import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -110,6 +112,39 @@ public class RESTPerson {
         return new Gson().toJson(Persons);
     }
 
+    @GET
+    @Path("phone/{phone}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersonByPhone(@PathParam("phone") int phone) {
+        List<JsonObject> Persons = new ArrayList<>();
+        List<Person> list = fp.getPersonByPhone(phone);
+        for (Person person : list) {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("firstName", person.getFirstName());
+            jsonObject.addProperty("lastName", person.getLastName());
+            jsonObject.addProperty("email", person.getEmail());
+            jsonObject.addProperty("address", new Gson().toJson(person.getAddresses()));
+            Persons.add(jsonObject);
+        }
+        return new Gson().toJson(Persons);
+    }
+
+    @GET
+    @Path("hobby/{hobby}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersonByHobby(@PathParam("hobby") String hobby) {
+        List<JsonObject> Persons = new ArrayList<>();
+        List<Person> list = fp.getPersonByHobby(hobby);
+        for (Person person : list) {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("firstName", person.getFirstName());
+            jsonObject.addProperty("lastName", person.getLastName());
+            jsonObject.addProperty("email", person.getEmail());
+            jsonObject.addProperty("address", new Gson().toJson(person.getAddresses()));
+            Persons.add(jsonObject);
+        }
+        return new Gson().toJson(Persons);
+    }
 //    @GET
 //    @Produces(MediaType.APPLICATION_JSON)
 //    @Path("{contactinfo/id}")
@@ -121,19 +156,14 @@ public class RESTPerson {
 //        return jsonreponse;
 //    }
 //
-//    @POST
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public String postPerson(String content) {
-//        JsonObject person = new JsonObject();
-//        Person jo = JSONConverter.getPersonFromJson(content);
-//        int temp = persons.size();
-//        person.addProperty("id", temp);
-//        persons.put(temp, jo);
-//        person.addProperty("Person", JSONConverter.getJSONFromPerson(persons.get(temp - 1)));
-//        String jsonreponse = new Gson().toJson(person);
-//        return jsonreponse;
-//    }
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String postPerson(String content) {
+        System.out.println("Create person by name");
+        Person person = fp.addPerson(new Gson().fromJson(content, Person.class));
+        return new Gson().toJson(person);
+    }
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -146,12 +176,10 @@ public class RESTPerson {
         return jsonreponse;
     }
 
-
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public String deletePerson(@PathParam("id") int id) throws RuntimeException
-    {
+    public String deletePerson(@PathParam("id") int id) throws RuntimeException {
         System.out.println("delete person");
 
         return new Gson().toJson(fp.removePersonbyid(id));

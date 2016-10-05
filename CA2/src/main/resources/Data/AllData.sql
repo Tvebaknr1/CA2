@@ -24,16 +24,16 @@ INSERT INTO INFOENTITY (DTYPE, `NAME`, DESCRIPTION, CVR, NUMEMPLOYEES, MARKETVAL
 
 INSERT INTO HOBBY (`NAME`, DESCRIPTION) VALUES ('Lob', 'At lobe hurtigt');
 INSERT INTO HOBBY (`NAME`, DESCRIPTION) VALUES ('Ridning', 'Gallop');
-INSERT INTO HOBBY (`NAME`, DESCRIPTION) VALUES ('Lob', 'At lobe langsomt');
+INSERT INTO HOBBY (`NAME`, DESCRIPTION) VALUES ('LangsomLob', 'At lobe langsomt');
 
 INSERT INTO INFOENTITY (DTYPE, FIRSTNAME, LASTNAME, EMAIL, ADDRESS_ID) VALUES ("Person", 'Louise', 'Nielsen', 'louise@gmail.dk', 1);
 INSERT INTO INFOENTITY (DTYPE, FIRSTNAME, LASTNAME, EMAIL, ADDRESS_ID) VALUES ("Person", 'Emilie', 'Nielsen', 'lou@mail.dk', 2);
 INSERT INTO INFOENTITY (DTYPE, FIRSTNAME, LASTNAME, EMAIL, ADDRESS_ID) VALUES ("Person", 'Peter', 'Leo', 'louise@mail.dk', 3);
 INSERT INTO INFOENTITY (DTYPE, FIRSTNAME, LASTNAME, EMAIL, ADDRESS_ID) VALUES ("Person", 'Emil', 'Ulrik', 'l@gmail.dk', 3);
 
-INSERT INTO infoentity_hobby(`persons_ID`, `hobbies_ID`) VALUES (1, 1);
-INSERT INTO infoentity_hobby(`persons_ID`, `hobbies_ID`) VALUES (2, 2);
-INSERT INTO infoentity_hobby(`persons_ID`, `hobbies_ID`) VALUES (3, 3);
+INSERT INTO infoentity_hobby(`persons_ID`, `hobbies_ID`) VALUES (5, 1);
+INSERT INTO infoentity_hobby(`persons_ID`, `hobbies_ID`) VALUES (6, 2);
+INSERT INTO infoentity_hobby(`persons_ID`, `hobbies_ID`) VALUES (6, 3);
 
 INSERT INTO PHONE (`NUMBER`, DESCRIPTION, `INFOENTITY_ID`) VALUES (41100532, "+45", 5);
 INSERT INTO PHONE (`NUMBER`, DESCRIPTION, `INFOENTITY_ID`) VALUES (45879323, "+45", 6);
