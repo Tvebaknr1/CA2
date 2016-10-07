@@ -55,23 +55,28 @@ public class InfoEntity implements Serializable {
 
     public List getPhones() {
         List<String> list = new ArrayList();
-        for (Phone p : phones) {
-            list.add(p.getDescription() + " " + p.getNumber());
+        try {
+            for (Phone p : phones) {
+                list.add(p.getDescription() + " " + p.getNumber());
+            }
+        } finally {
+            return list;
         }
-        return list;
     }
 
     public String getAddresses() {
-        return address.getStreet() + " " + address.getAdditionalInfo();
-
+        try {
+            return address.getStreet() + " " + address.getAdditionalInfo();
+        } catch (Exception ex) {
+            return "";
+        }
     }
-    
-    public Address getAddress()
-    {
+
+    public Address getAddress() {
         return address;
     }
-    public List<Phone> getPhone()
-    {
+
+    public List<Phone> getPhone() {
         return phones;
     }
 

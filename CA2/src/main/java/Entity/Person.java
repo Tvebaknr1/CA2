@@ -37,7 +37,7 @@ public class Person extends InfoEntity {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-    
+
     public String getFirstName() {
         return firstName;
     }
@@ -53,17 +53,21 @@ public class Person extends InfoEntity {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return firstName + lastName + super.getEmail();
     }
-    
+
     public List getMyHobbies() {
         List<String> list = new ArrayList();
-        for (Hobby h : hobbies) {
-            list.add(h.getName());
+        try {
+            for (Hobby h : hobbies) {
+                list.add(h.getName());
+            }
+        } finally {
+            return list;
         }
-        return list;
     }
 
 }
