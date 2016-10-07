@@ -20,9 +20,9 @@
 // *
 // * @author Emil
 // */
-//public class RESTCompanyintegrationTest {
+//public class RESTCompanyIntegrationTest {
 //
-//    public RESTCompanyintegrationTest() {
+//    public RESTCompanyIntegrationTest() {
 //    }
 //
 //    @BeforeClass
