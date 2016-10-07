@@ -20,24 +20,29 @@ and open the template in the editor.
             <li><a class="active" href="#home">Hjem</a></li>
             <li><a href="index.html">API</a></li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn" onclick="myFunction()">Dropdown</a>
+                <a href="javascript:void(0)" class="dropbtn" onclick="myFunction()">Find/tilføj</a>
                 <div class="dropdown-content" id="myDropdown">
+                    
                     <a href="findPerson.html">Find person</a>
                     <a href="#">Tilføj person</a>
                     <a href="findCompany.html">Find firma</a>
                 </div>
+                
             </li>
         </ul>
         <h1>Find personer</h1>
-        <button id="showAll">Vis alle</button>
+        <button id="showAll" class="myButton">Vis alle</button>
+        <button id="findP" class="myButton">Find via tlf. nummer</button><input type="number" id="phoneN">
+        <button id="findN" class="myButton">Find via fornavn</button><input type="text" id="name">
+        <button id="findZ" class="myButton">Find via postnummer</button><input type="number" id="zip">
         <div id="all"></div>
-        <table>
-            <tr>
-                <th>Fornavn</th>
-                <th>Efternavn</th>
-                <th>E-mail</th>
-                <th>Adresse</th>
-            </tr>
+        <table id="myTable">
+           
+            <thead><tr><td>Fornavn</td><td>Efternavn</td><td>E-mail</td><td>Adresse</td></tr></thead>
+            <tbody></tbody>
+               
         </table>
+        <br>
+        
     </body>
 </html>

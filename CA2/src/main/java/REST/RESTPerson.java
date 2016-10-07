@@ -145,17 +145,14 @@ public class RESTPerson {
         }
         return new Gson().toJson(Persons);
     }
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("{contactinfo/id}")
-//    public String getPersonid(@PathParam("contactinfo") int contactinfo, @DefaultValue("None") @QueryParam("job") String job) {
-//        JsonObject person = new JsonObject();
-//        int key = contactinfo;
-//        person.addProperty("Person", JSONConverter.getJSONFromint(persons.get(key).getId()));
-//        String jsonreponse = new Gson().toJson(person);
-//        return jsonreponse;
-//    }
-//
+@GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("zip")
+    public String getZip() {
+
+        List<Integer> li= fp.getZipCodes();
+        return new Gson().toJson(li);
+    }
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

@@ -5,6 +5,7 @@
  */
 package Facade;
 
+import Entity.CityInfo;
 import Entity.Hobby;
 import Entity.Person;
 import Entity.Phone;
@@ -182,22 +183,31 @@ public class FacadePerson {
             em.close();
         }
     }
+    
+     public List<Integer> getZipCodes() {
+        EntityManager em = emf.createEntityManager();
 
-//    public List<Person> getPersonsbyzipcode(int zipCode) {
-//
-//        EntityManager em = emf.createEntityManager();
-//
-//        List<Person> persons = null;
-//        try {
-//            em.getTransaction().begin();
-//            persons = em.createQuery("SELECT p1 FROM InfoEntity p1 join Address c1 WHERE p1.address =c1.id").getResultList();
-//                    //+ "SELECT p, z FROM Person p WHERE p.zip LIKE :zipcode INNER JOIN p1.neighbors c2").setParameter("zipcode", zipCode).getResultList();
-//            em.getTransaction().commit();
-//            return persons;
-//        } finally {
-//            em.close();
-//        }
-//    }
+        List<CityInfo> ci = null;
+
+        try {
+            em.getTransaction().begin();
+            ci = em.createQuery("Select i from CityInfo i").getResultList();
+            em.getTransaction().commit();
+            List<Integer> list = new ArrayList();
+            
+            for(int i = 0; i < ci.size(); i++)
+            {
+                list.add(ci.get(i).getZip());
+            }
+            
+            return list;
+            
+        } finally {
+            em.close();
+        }
+    }
+    
+    
     public static void main(String[] args) {
         FacadePerson fp = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));
         System.out.println(fp.getPersons());
