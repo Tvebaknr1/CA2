@@ -56,7 +56,7 @@ public class InfoEntity implements Serializable {
     public List getPhones() {
         List<String> list = new ArrayList();
         for (Phone p : phones) {
-            list.add(p.getDescription() + p.getNumber());
+            list.add(p.getDescription() + " " + p.getNumber());
         }
         return list;
     }

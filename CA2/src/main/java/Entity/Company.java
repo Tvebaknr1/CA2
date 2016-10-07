@@ -19,12 +19,12 @@ public class Company extends InfoEntity
     private String description;
     private int cvr;
     private int numEmployees;
-    private float marketValue;
+    private double marketValue;
 
     public Company()
     {}
 
-    public Company(String name, String description, int cvr, int numEmployees, float marketValue) {
+    public Company(String name, String description, int cvr, int numEmployees, double marketValue) {
         this.name = name;
         this.description = description;
         this.cvr = cvr;
@@ -64,7 +64,7 @@ public class Company extends InfoEntity
         this.numEmployees = numEmployees;
     }
 
-    public float getMarketValue() {
+    public double getMarketValue() {
         return marketValue;
     }
 

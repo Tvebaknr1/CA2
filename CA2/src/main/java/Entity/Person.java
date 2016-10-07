@@ -57,5 +57,13 @@ public class Person extends InfoEntity {
     public String toString(){
         return firstName + lastName + super.getEmail();
     }
+    
+    public List getMyHobbies() {
+        List<String> list = new ArrayList();
+        for (Hobby h : hobbies) {
+            list.add(h.getName());
+        }
+        return list;
+    }
 
 }
