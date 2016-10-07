@@ -72,6 +72,8 @@ public class RESTPerson {
             jsonObject.addProperty("lastName", person.getLastName());
             jsonObject.addProperty("email", person.getEmail());
             jsonObject.addProperty("address", new Gson().toJson(person.getAddresses()));
+            jsonObject.addProperty("phone", new Gson().toJson(person.getPhones()));
+            jsonObject.addProperty("hobby", new Gson().toJson(person.getMyHobbies()));
             Persons.add(jsonObject);
         }
         return new Gson().toJson(Persons);
@@ -89,6 +91,8 @@ public class RESTPerson {
             jsonObject.addProperty("lastName", person.getLastName());
             jsonObject.addProperty("email", person.getEmail());
             jsonObject.addProperty("address", new Gson().toJson(person.getAddresses()));
+            jsonObject.addProperty("phone", new Gson().toJson(person.getPhones()));
+            jsonObject.addProperty("hobby", new Gson().toJson(person.getMyHobbies()));
             Persons.add(jsonObject);
         }
         return new Gson().toJson(Persons);
@@ -106,6 +110,8 @@ public class RESTPerson {
             jsonObject.addProperty("lastName", person.getLastName());
             jsonObject.addProperty("email", person.getEmail());
             jsonObject.addProperty("address", new Gson().toJson(person.getAddresses()));
+            jsonObject.addProperty("phone", new Gson().toJson(person.getPhones()));
+            jsonObject.addProperty("hobby", new Gson().toJson(person.getMyHobbies()));
             Persons.add(jsonObject);
         }
         return new Gson().toJson(Persons);
@@ -123,6 +129,8 @@ public class RESTPerson {
             jsonObject.addProperty("lastName", person.getLastName());
             jsonObject.addProperty("email", person.getEmail());
             jsonObject.addProperty("address", new Gson().toJson(person.getAddresses()));
+            jsonObject.addProperty("phone", new Gson().toJson(person.getPhones()));
+            jsonObject.addProperty("hobby", new Gson().toJson(person.getMyHobbies()));
             Persons.add(jsonObject);
         }
         return new Gson().toJson(Persons);
@@ -140,6 +148,8 @@ public class RESTPerson {
             jsonObject.addProperty("lastName", person.getLastName());
             jsonObject.addProperty("email", person.getEmail());
             jsonObject.addProperty("address", new Gson().toJson(person.getAddresses()));
+            jsonObject.addProperty("phone", new Gson().toJson(person.getPhones()));
+            jsonObject.addProperty("hobby", new Gson().toJson(person.getMyHobbies()));
             Persons.add(jsonObject);
         }
         return new Gson().toJson(Persons);
