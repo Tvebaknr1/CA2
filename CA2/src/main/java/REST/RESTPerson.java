@@ -7,6 +7,7 @@ package REST;
 
 import Entity.Person;
 import Facade.FacadePerson;
+import RESTException.PersonNotFoundException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
@@ -31,9 +32,11 @@ import javax.ws.rs.core.UriInfo;
  * @author Emil
  */
 @Path("person")
-public class RESTPerson {
+public class RESTPerson
+{
 
-    public RESTPerson(UriInfo context) {
+    public RESTPerson(UriInfo context)
+    {
         this.context = context;
     }
 
@@ -43,7 +46,8 @@ public class RESTPerson {
     /**
      * Creates a new instance of RestPerson
      */
-    public RESTPerson() {
+    public RESTPerson()
+    {
         //facadePerson = new FacadePerson(Persistence.createEntityManagerFactory("ca2pu"));
     }
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("ca2pu");
@@ -62,11 +66,13 @@ public class RESTPerson {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
-    public String getPerson() throws RuntimeException {
+    public String getPerson() throws RuntimeException
+    {
 
         List<JsonObject> Persons = new ArrayList<>();
         List<Person> list = fp.getPersons();
-        for (Person person : list) {
+        for (Person person : list)
+        {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("firstName", person.getFirstName());
             jsonObject.addProperty("lastName", person.getLastName());
@@ -82,10 +88,17 @@ public class RESTPerson {
     @GET
     @Path("firstname/{firstName}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonByFirstname(@PathParam("firstName") String firstName) {
+    public String getPersonByFirstname(@PathParam("firstName") String firstName) throws PersonNotFoundException
+    {
         List<JsonObject> Persons = new ArrayList<>();
         List<Person> list = fp.getPersonByName(firstName);
-        for (Person person : list) {
+        if (list.isEmpty())
+        {
+            throw new PersonNotFoundException();
+        }
+
+        for (Person person : list)
+        {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("firstName", person.getFirstName());
             jsonObject.addProperty("lastName", person.getLastName());
@@ -101,10 +114,16 @@ public class RESTPerson {
     @GET
     @Path("zip/{zip}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonByZip(@PathParam("zip") int zip) {
+    public String getPersonByZip(@PathParam("zip") int zip) throws PersonNotFoundException
+    {
         List<JsonObject> Persons = new ArrayList<>();
         List<Person> list = fp.getPersonByZip(zip);
-        for (Person person : list) {
+        if(list.isEmpty())
+        {
+            throw new PersonNotFoundException();
+        }
+        for (Person person : list)
+        {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("firstName", person.getFirstName());
             jsonObject.addProperty("lastName", person.getLastName());
@@ -120,10 +139,16 @@ public class RESTPerson {
     @GET
     @Path("phone/{phone}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonByPhone(@PathParam("phone") int phone) {
+    public String getPersonByPhone(@PathParam("phone") int phone) throws PersonNotFoundException
+    {
         List<JsonObject> Persons = new ArrayList<>();
         List<Person> list = fp.getPersonByPhone(phone);
-        for (Person person : list) {
+        if(list.isEmpty())
+        {
+            throw new PersonNotFoundException();
+        }
+        for (Person person : list)
+        {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("firstName", person.getFirstName());
             jsonObject.addProperty("lastName", person.getLastName());
@@ -139,10 +164,16 @@ public class RESTPerson {
     @GET
     @Path("hobby/{hobby}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonByHobby(@PathParam("hobby") String hobby) {
+    public String getPersonByHobby(@PathParam("hobby") String hobby) throws PersonNotFoundException
+    {
         List<JsonObject> Persons = new ArrayList<>();
         List<Person> list = fp.getPersonByHobby(hobby);
-        for (Person person : list) {
+        if(list.isEmpty())
+        {
+            throw new PersonNotFoundException();
+        }
+        for (Person person : list)
+        {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("firstName", person.getFirstName());
             jsonObject.addProperty("lastName", person.getLastName());
@@ -154,27 +185,33 @@ public class RESTPerson {
         }
         return new Gson().toJson(Persons);
     }
-@GET
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("zip")
-    public String getZip() {
+    public String getZip() throws RuntimeException
+    {
 
-        List<Integer> li= fp.getZipCodes();
+        List<Integer> li = fp.getZipCodes();
         return new Gson().toJson(li);
     }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String postPerson(String content) throws RuntimeException {
+    public String postPerson(String content) throws RuntimeException
+    {
         System.out.println("Create person by name");
         Person person = fp.addPerson(new Gson().fromJson(content, Person.class));
         return new Gson().toJson(person);
     }
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public String putPerson(@PathParam("id") int id, String content) throws RuntimeException {
+    public String putPerson(@PathParam("id") int id, String content) throws RuntimeException
+    {
         JsonObject person = new JsonObject();
         Person jo = JSONConverter.getPersonFromJson(content);
         fp.put(jo);
@@ -185,7 +222,8 @@ public class RESTPerson {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public String deletePerson(@PathParam("id") int id) throws RuntimeException {
+    public String deletePerson(@PathParam("id") int id) throws RuntimeException
+    {
         System.out.println("delete person");
 
         return new Gson().toJson(fp.removePersonbyid(id));

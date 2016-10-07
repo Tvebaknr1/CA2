@@ -30,7 +30,7 @@ public class PersonNotFoundExceptionMapper implements ExceptionMapper<PersonNotF
     @Override
     public Response toResponse(PersonNotFoundException e)
     {
-        boolean isDebug = context.getInitParameter("debug").equals("true");
+        boolean isDebug = false;//context.getInitParameter("debug").equals("true");
 
         ErrorMessage err = new ErrorMessage(e, 404, isDebug);
         err.setMessage("Person with requested id not found");
