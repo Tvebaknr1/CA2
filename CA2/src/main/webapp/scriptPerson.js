@@ -31,7 +31,19 @@ function showAll()
                 tr.append("<td>" + json[i].lastName + "</td>");
                 tr.append("<td>" + json[i].email + "</td>");
                 tr.append("<td>" + json[i].address + "</td>");
-                tr.append("<td>" + json[i].phone + "</td>");
+                tr.append("<td>" + json[i].phone.toString().substring(2,json[i].phone.length-2) + "</td>");
+                var h = "";
+                
+                var j = $.parseJSON (json[i].hobby);
+                for(var l = 0; l < j.length ; l++)
+                {
+                    h += j[l].toString();
+                    if(l < j.length-1)
+                    {
+                        h+= ", ";
+                    }
+                }
+                tr.append("<td>" + h+ "</td>");
                 $('table').append(tr);
                 console.log(json[i].firstName);
             }
@@ -57,6 +69,19 @@ function findPersonByPhone()
                 tr.append("<td>" + json[i].lastName + "</td>");
                 tr.append("<td>" + json[i].email + "</td>");
                 tr.append("<td>" + json[i].address + "</td>");
+                tr.append("<td>" + json[i].phone.toString().substring(2,json[i].phone.length-2) + "</td>");
+                var h = "";
+                
+                var j = $.parseJSON (json[i].hobby);
+                for(var l = 0; l < j.length ; l++)
+                {
+                    h += j[l].toString();
+                    if(l < j.length-1)
+                    {
+                        h+= ", ";
+                    }
+                }
+                tr.append("<td>" + h+ "</td>");
                 $('table').append(tr);
                 console.log(json[i].firstName);
             }
@@ -82,6 +107,19 @@ function findPersonByName()
                 tr.append("<td>" + json[i].lastName + "</td>");
                 tr.append("<td>" + json[i].email + "</td>");
                 tr.append("<td>" + json[i].address + "</td>");
+                tr.append("<td>" + json[i].phone.toString().substring(2,json[i].phone.length-2) + "</td>");
+                var h = "";
+                
+                var j = $.parseJSON (json[i].hobby);
+                for(var l = 0; l < j.length ; l++)
+                {
+                    h += j[l].toString();
+                    if(l < j.length-1)
+                    {
+                        h+= ", ";
+                    }
+                }
+                tr.append("<td>" + h+ "</td>");
                 $('table').append(tr);
                 console.log(json[i].firstName);
             }
@@ -107,7 +145,19 @@ function findPersonByPhone()
                 tr.append("<td>" + json[i].lastName + "</td>");
                 tr.append("<td>" + json[i].email + "</td>");
                 tr.append("<td>" + json[i].address + "</td>");
+                tr.append("<td>" + json[i].phone.toString().substring(2,json[i].phone.length-2) + "</td>");
+                var h = "";
                 
+                var j = $.parseJSON (json[i].hobby);
+                for(var l = 0; l < j.length ; l++)
+                {
+                    h += j[l].toString();
+                    if(l < j.length-1)
+                    {
+                        h+= ", ";
+                    }
+                }
+                tr.append("<td>" + h+ "</td>");
                 $('table').append(tr);
                 console.log(json[i].firstName);
             }
