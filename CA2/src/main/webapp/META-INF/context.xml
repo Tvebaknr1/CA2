@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/CA2">
+<Context path="/CA2/frontPage.html">
   <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="com.mycompany_restAndRestApi_war_1.0-SNAPSHOTPU" password="1234" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/world?zeroDateTimeBehavior=convertToNull" username="root"/>
   <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="ca2pu" password="1234" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/ca2pu?zeroDateTimeBehavior=convertToNull" username="root"/>
 </Context>
