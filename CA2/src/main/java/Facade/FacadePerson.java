@@ -25,7 +25,6 @@ public class FacadePerson {
     EntityManagerFactory emf;
 
     public FacadePerson(EntityManagerFactory emf) {
-        System.out.println("test 2");
         this.emf = emf;
     }
 
