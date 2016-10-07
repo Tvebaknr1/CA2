@@ -55,7 +55,7 @@ public class FacadePersonTest {
         expResult1.setEmail("louise@gmail.com");
         Person result = facadePerson.getPerson(id);
         assertEquals(expResult.toString(), result.toString());
-        assertNotEquals(expResult1, result);
+        assertNotEquals(expResult1.toString(), result.toString());
     }
 
     /**

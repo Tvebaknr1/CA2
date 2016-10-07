@@ -35,7 +35,6 @@ public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundExceptio
        // isDebug = context.getInitParameter("debug").equals("true");
 
         ErrorMessage err = new ErrorMessage(e, 404, isDebug);
-        err.setDescription("The requested service does not exist");
         err.setMessage("The requested service does not exist");
 
         return Response.status(404).entity(gson.toJson(err)).type(MediaType.APPLICATION_JSON).build();

@@ -33,7 +33,6 @@ public class CompanyNotFoundExceptionMapper implements ExceptionMapper<CompanyNo
         boolean isDebug = false;
 
         ErrorMessage err = new ErrorMessage(e, 404, isDebug);
-        err.setDescription("Company with requested id not found");
         err.setMessage("Company with requested id not found");
 
         return Response.status(404).entity(gson.toJson(err)).type(MediaType.APPLICATION_JSON).build();
