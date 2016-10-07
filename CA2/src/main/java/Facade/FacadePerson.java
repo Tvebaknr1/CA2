@@ -94,7 +94,10 @@ public class FacadePerson {
             em.getTransaction().commit();
             List<Person> p = new ArrayList();
             for (Person person : persons) {
-                if (person.getAddress().getCityInfo().getZip() == zip) {
+                if (person.getAddress().getCityInfo() != null &&
+                        person.getAddress() != null &&
+                        person != null &&
+                        person.getAddress().getCityInfo().getZip() == zip) {
                     p.add(person);
                 }
             }
@@ -224,6 +227,7 @@ public class FacadePerson {
             em.getTransaction().begin();
             em.remove(p);
             em.getTransaction().commit();
+            
             return p;
         } finally {
             em.close();
