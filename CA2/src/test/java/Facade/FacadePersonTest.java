@@ -7,6 +7,7 @@ package Facade;
 
 import Entity.Person;
 import java.util.List;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -58,18 +59,84 @@ public class FacadePersonTest {
         assertNotEquals(expResult1, result);
     }
 
+    
+
+
     /**
-     * Test of getPersons method, of class FacadePerson.
+     * Test of getPersonbyid method, of class FacadePerson.
      */
     @Test
-    public void testGetPersons_0args() {
-        System.out.println("getPersons");
-        List<Person> expResult = facadePerson.getPersons();
-        List<Person> result = facadePerson.getPersons();
-        for (int i = 0; i < result.size(); i++) {
-            assertEquals(expResult.get(i).toString(), result.get(i).toString());
-        }
-        
+    public void testGetPersonbyid() {
+        System.out.println("getPersonbyid");
+        int id = 1;
+        Person expResult = null;
+        Person result = facadePerson.getPersonbyid(id);
+        assertEquals(expResult, result);
     }
-    
+
+    /**
+     * Test of getPersonByName method, of class FacadePerson.
+     */
+    @Test
+    public void testGetPersonByName() {
+        System.out.println("getPersonByName");
+        String firstName = "Emil";
+        String expResult = "Ulrik";
+        List<Person> result = facadePerson.getPersonByName(firstName);
+        assertEquals(expResult, result.get(0).getLastName());
+    }
+
+    /**
+     * Test of getPersonByZip method, of class FacadePerson.
+     */
+    @Test
+    public void testGetPersonByZip() {
+        System.out.println("getPersonByZip");
+        int zip = 555;
+        Person expResult = new Person("Louise", "Nielsen");
+        expResult.setEmail("louise@gmail.dk");
+        List<Person> result = facadePerson.getPersonByZip(zip);
+        assertEquals(expResult.toString(), result.get(0).toString());
+    }
+
+    /**
+     * Test of getPersonByPhone method, of class FacadePerson.
+     */
+    @Test
+    public void testGetPersonByPhone() {
+        System.out.println("getPersonByPhone");
+        int phonenr = 45879323;
+        Person expResult = new Person("Emilie", "Nielsen");
+        expResult.setEmail("lou@mail.dk");
+        List<Person> result = facadePerson.getPersonByPhone(phonenr);
+        assertEquals(expResult.toString(), result.get(0).toString());
+    }
+
+    /**
+     * Test of getPersonByHobby method, of class FacadePerson.
+     */
+    @Test
+    public void testGetPersonByHobby() {
+        System.out.println("getPersonByHobby");
+        String hobbyname = "lob";
+        Person expResult = new Person("Louise", "Nielsen");
+        expResult.setEmail("louise@gmail.dk");
+        List<Person> result = facadePerson.getPersonByHobby(hobbyname);
+        assertEquals(expResult.toString(), result.get(0).toString());
+    }
+
+//    /**
+//     * Test of addPerson method, of class FacadePerson.
+//     */
+//    @Test
+//    public void testAddPersonAndRemove() {
+//        System.out.println("addPerson");
+//        Person person = new Person("Lars", "Doe");
+//        Person result = facadePerson.addPerson(person);
+//        assertEquals(person, result);
+//        System.out.println("removePersonbyid");
+//        int id = 9;
+//        result = facadePerson.removePersonbyid(id);
+//        assertEquals(person.toString(), result.toString());
+//    }
 }
