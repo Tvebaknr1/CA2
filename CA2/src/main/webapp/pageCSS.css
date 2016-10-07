@@ -68,3 +68,14 @@ table {
 th {
     text-align: left;
 }
+
+.myButton {
+  background: #333;
+
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 12px;
+  background: #333;
+  padding: 8px 15px 8px 15px;
+  text-decoration: none;
+}

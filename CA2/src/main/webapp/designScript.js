@@ -7,13 +7,14 @@
 
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
+    document.getElementById("myDropdown2").classList.toggle("show");
 }
 window.onclick = function (e) {
     if (!e.target.matches('.dropbtn')) {
 
         var dropdowns = document.getElementsByClassName("dropdown-content");
-        for (var d = 0; d < dropdowns.length; d++) {
-            var openDropdown = dropdowns[d];
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
             if (openDropdown.classList.contains('show')) {
                 openDropdown.classList.remove('show');
             }
