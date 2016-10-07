@@ -32,7 +32,6 @@ public class RuntimeExceptionMapper implements ExceptionMapper<RuntimeException>
         boolean isDebug = false;
 
         ErrorMessage err = new ErrorMessage(e, 500, isDebug);
-        err.setDescription("Internal Server Problem. We are sorry for the inconvenience");
         err.setMessage("Internal Server Problem. We are sorry for the inconvenience");
         
         return Response.status(500).entity(gson.toJson(err)).type(MediaType.APPLICATION_JSON).build(); 
