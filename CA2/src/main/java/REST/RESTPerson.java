@@ -5,7 +5,6 @@
  */
 package REST;
 
-import Entity.Company;
 import Entity.Person;
 import Facade.FacadePerson;
 import com.google.gson.Gson;
@@ -63,7 +62,7 @@ public class RESTPerson {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
-    public String getPerson() {
+    public String getPerson() throws RuntimeException {
 
         List<JsonObject> Persons = new ArrayList<>();
         List<Person> list = fp.getPersons();
@@ -159,7 +158,7 @@ public class RESTPerson {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String postPerson(String content) {
+    public String postPerson(String content) throws RuntimeException {
         System.out.println("Create person by name");
         Person person = fp.addPerson(new Gson().fromJson(content, Person.class));
         return new Gson().toJson(person);
@@ -168,7 +167,7 @@ public class RESTPerson {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public String putPerson(@PathParam("id") int id, String content) {
+    public String putPerson(@PathParam("id") int id, String content) throws RuntimeException {
         JsonObject person = new JsonObject();
         Person jo = JSONConverter.getPersonFromJson(content);
         fp.put(jo);
